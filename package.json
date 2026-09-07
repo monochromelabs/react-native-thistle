@@ -1,6 +1,6 @@
 {
   "name": "react-native-thistle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An intuitive framework for inference at the edge.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
