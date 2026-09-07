@@ -41,11 +41,15 @@ The public API is designed to hide Nitro Modules, native ML runtimes, tokenizers
 ## Installation
 
 ```sh
-npm install react-native-thistle react-native-nitro-modules
+npm install react-native-thistle
 npx react-native-thistle setup
 ```
 
-`react-native-nitro-modules` is required because Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge.
+Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge and declares `react-native-nitro-modules` as a peer dependency. Modern npm versions automatically install a compatible peer dependency when possible, so installing `react-native-thistle` is usually sufficient. To declare Nitro explicitly in the app, or when using a package manager that does not automatically install peers, run:
+
+```sh
+npm install react-native-thistle react-native-nitro-modules
+```
 
 The setup command creates the app-level `assets/` directory, configures Android to package `.gguf` files from it, and adds an iOS build phase through CocoaPods. It is safe to run again after native project changes.
 
