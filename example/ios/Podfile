@@ -1,0 +1,64 @@
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'ThistleLite' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  post_install do |installer|
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
+
+    installer.aggregate_targets.each do |aggregate_target|
+      aggregate_target.user_project.native_targets.each do |native_target|
+        next unless native_target.name == 'ThistleLite'
+
+        phase = native_target.shell_script_build_phases.find {
+          |existing_phase| existing_phase.name == 'Thistle GGUF models'
+        }
+        phase ||= native_target.new_shell_script_build_phase('Thistle GGUF models')
+        phase.shell_script = <<~'SCRIPT'
+          set -eu
+
+          destination="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+          mkdir -p "$destination"
+          find "$destination" -type f -name '*.gguf' -delete
+
+          for model_directory in \
+            "${THISTLE_MODEL_DIR:-}" \
+            "$PODS_ROOT/../../assets" \
+            "$SRCROOT/../../assets" \
+            "$SRCROOT/../assets" \
+            "$SRCROOT/assets"
+          do
+            if [ -d "$model_directory" ]; then
+              find "$model_directory" -type f -name '*.gguf' -exec cp -f {} "$destination/" \;
+            fi
+          done
+        SCRIPT
+      end
+    end
+  end
+end

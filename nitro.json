@@ -1,0 +1,23 @@
+{
+  "cxxNamespace": ["thistle"],
+  "ios": {
+    "iosModuleName": "Thistle"
+  },
+  "android": {
+    "androidNamespace": ["thistle"],
+    "androidCxxLibName": "thistle"
+  },
+  "autolinking": {
+    "Thistle": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "ThistleModule"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "Thistle"
+      }
+    }
+  },
+  "ignorePaths": ["node_modules"]
+}
