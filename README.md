@@ -42,11 +42,22 @@ The public API is designed to hide Nitro Modules, native ML runtimes, tokenizers
 
 ```sh
 npm install react-native-thistle react-native-nitro-modules
+npx react-native-thistle setup
 ```
 
 `react-native-nitro-modules` is required because Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge.
 
-For an existing React Native app, install the iOS dependencies after installation:
+The setup command creates the app-level `assets/` directory, configures Android to package `.gguf` files from it, and adds an iOS build phase through CocoaPods. It is safe to run again after native project changes.
+
+Thistle is a native module. After installation or setup, rebuild the native app; a Metro reload is not enough:
+
+```sh
+npm run ios
+# or
+npm run android
+```
+
+For an existing React Native app, install the iOS dependencies after setup:
 
 ```sh
 cd ios
@@ -62,6 +73,22 @@ THISTLE_SKIP_ASSETS=1 npm install react-native-thistle
 
 Creating the folder is only a convenience. You still need to add a model file yourself.
 
+## From Claude Or Axios
+
+Thistle runs a local GGUF model on the device. It is not a drop-in replacement for a Claude API client, and it does not require Axios or a network request. Replace the remote request with a model instance and a local prompt:
+
+```tsx
+import { Thistle } from 'react-native-thistle';
+
+const model = await Thistle.init('model.gguf', {
+  scaffolding: 'eggwhite',
+});
+
+const answer = await model.prompt(userMessage);
+```
+
+When migrating an existing Claude integration, convert message history and system instructions into the prompt text and `scaffolding` option. Pass structured app context or attachment metadata through the `data` option. Streaming, tool calls, provider-specific message formats, and Claude model behavior require application-level changes.
+
 ## Add A Model
 
 Put a GGUF model in the application-level `assets/` directory:
@@ -74,7 +101,7 @@ my-app/
 		chat.ts
 ```
 
-For iOS, CocoaPods automatically copies `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, copy the model into the application's `android/app/src/main/assets/` directory, or add an equivalent Gradle copy task. Both platforms can initialize the model by filename:
+For iOS, CocoaPods copies `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, the setup command configures `android/app/build.gradle` to use that same application-level `assets/` directory as an Android asset source. You do not need to copy the model into `android/app/src/main/assets/` separately. Both platforms can initialize the model by filename:
 
 ```tsx
 const model = await Thistle.init('model.gguf');

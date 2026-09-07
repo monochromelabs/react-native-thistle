@@ -4,6 +4,9 @@
   "description": "An intuitive framework for inference at the edge.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
+  "bin": {
+    "react-native-thistle": "./scripts/setup.cjs"
+  },
   "exports": {
     ".": {
       "react-native-thistle-source": "./src/index.tsx",
