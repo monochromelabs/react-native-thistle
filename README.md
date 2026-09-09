@@ -51,7 +51,9 @@ Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge a
 npm install react-native-thistle react-native-nitro-modules
 ```
 
-The setup command creates the app-level `assets/` directory, configures Android to package `.gguf` files from it, and adds an iOS build phase through CocoaPods. It is safe to run again after native project changes.
+The setup command creates the app-level `assets/` directory, lists the `.gguf` files currently in it, and lets you select one or more models to connect to the native app. The selection is saved in `.thistle/models.json`, so selected models are already checked the next time setup runs. Android and iOS are both configured from that same selection. It is safe to run again after native project changes.
+
+The final `None` option disconnects every model. Choosing it and pressing Enter asks for confirmation before native wiring is cleared. Adding a new `.gguf` file to `assets/` makes it available the next time setup runs; removing a file removes it from the available selection and native configuration.
 
 Thistle is a native module. After installation or setup, rebuild the native app; a Metro reload is not enough:
 
@@ -105,7 +107,7 @@ my-app/
 		chat.ts
 ```
 
-For iOS, CocoaPods copies `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, the setup command configures `android/app/build.gradle` to use that same application-level `assets/` directory as an Android asset source. You do not need to copy the model into `android/app/src/main/assets/` separately. Both platforms can initialize the model by filename:
+For iOS, CocoaPods copies the selected `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, the setup command copies the same selected files into a generated Android assets directory during the build. You do not need to copy models into `android/app/src/main/assets/` separately. Both platforms can initialize any connected model by filename:
 
 ```tsx
 const model = await Thistle.init('model.gguf');
