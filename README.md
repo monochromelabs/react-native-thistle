@@ -10,13 +10,20 @@
 	</p>
 </div>
 
-Thistle is a React Native Nitro Module for running local GGUF language models on-device. It keeps the JavaScript API small while the native runtime handles tokenization, llama.cpp inference, CPU execution, and iOS Metal acceleration.
+**Private by default. Available to more people.**
+
+Thistle is a React Native Nitro Module for operationalizing local AI in native mobile experiences. It runs compatible GGUF language models on the hardware already in the user's device, helping apps keep sensitive work local, reduce reliance on remote inference services, and make capable AI more accessible where network access or hosted API costs are limiting.
+
+The JavaScript API stays small while the native runtime handles tokenization, llama.cpp inference, CPU execution, and iOS Metal acceleration. Thistle gives application developers more control over where inference happens, which model is used, and how local AI fits into the product.
 
 ## Features
 
 - **Local GGUF inference** from a model bundled into the native iOS app
 - **iOS Metal acceleration** with CPU fallback through llama.cpp
-- **Instruction scaffolding** with the built-in `eggwhite` preset or custom guidance
+- **Private-by-default execution** without sending model prompts to a remote service
+- **More control over cost, connectivity, and deployment** by running on-device
+- **Less dependence on remote data centers** for everyday inference workloads
+- **Instruction scaffolding** with the built-in `xylem` preset or custom guidance
 - **Structured context injection** for app data, attachments, and retrieved content
 - **Independent model instances** so apps can manage multiple local models
 - **Typed runtime limits** for input, context, output, and reasoning tokens
@@ -29,14 +36,16 @@ Thistle is a React Native Nitro Module for running local GGUF language models on
 - A GGUF model compatible with the bundled llama.cpp runtime
 - Enough device memory for the model, context state, and Metal buffers
 
-Thistle is a React Native package for simple, local AI inference. The intended developer experience is:
+Local inference does require a compatible model and sufficient device resources. In return, prompts and responses can stay on the device, apps can continue working without a model API connection, and teams can choose a model and deployment experience that fits their users.
+
+Thistle is a React Native package for putting local inference into real mobile workflows without asking each app to build its own native model pipeline. The intended developer experience is:
 
 1. Install the package.
 2. Drop a supported model into `assets/`.
 3. Initialize one or more model instances.
 4. Use those instances anywhere in your JavaScript or TypeScript code.
 
-The public API is designed to hide Nitro Modules, native ML runtimes, tokenizers, delegates, and hardware selection from the application developer.
+The public API is designed to hide Nitro Modules, native ML runtimes, tokenizers, delegates, and hardware selection from the application developer while preserving control over the local model and the app's AI behavior.
 
 ## Installation
 
@@ -45,7 +54,7 @@ npm install react-native-thistle
 npx react-native-thistle setup
 ```
 
-Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge and declares `react-native-nitro-modules` as a peer dependency. Modern npm versions automatically install a compatible peer dependency when possible, so installing `react-native-thistle` is usually sufficient. To declare Nitro explicitly in the app, or when using a package manager that does not automatically install peers, run:
+Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge and declares `react-native-nitro-modules` as a peer dependency. The package is intended to make local inference practical to adopt: install it, connect the model assets you want, and let the native build package them for the app. Modern npm versions automatically install a compatible peer dependency when possible, so installing `react-native-thistle` is usually sufficient. To declare Nitro explicitly in the app, or when using a package manager that does not automatically install peers, run:
 
 ```sh
 npm install react-native-thistle react-native-nitro-modules
@@ -79,21 +88,24 @@ THISTLE_SKIP_ASSETS=1 npm install react-native-thistle
 
 Creating the folder is only a convenience. You still need to add a model file yourself.
 
-## From Claude Or Axios
+## Implementing Local AI Requests
 
-Thistle runs a local GGUF model on the device. It is not a drop-in replacement for a Claude API client, and it does not require Axios or a network request. Replace the remote request with a model instance and a local prompt:
+If your app currently sends prompts to a hosted model provider, Thistle lets you build that experience around local inference instead. This applies to integrations with any hosted AI service or provider SDK, not a specific provider. Keeping the request on the device can improve privacy, reduce dependence on network availability and hosted API pricing, and give the app more control over the model it ships. Local inference does not require Axios or another HTTP client for the model request. Replace the network-backed model call with a Thistle model instance and a local prompt:
 
 ```tsx
 import { Thistle } from 'react-native-thistle';
 
 const model = await Thistle.init('model.gguf', {
-  scaffolding: 'eggwhite',
+  scaffolding: 'xylem',
 });
 
 const answer = await model.prompt(userMessage);
 ```
 
-When migrating an existing Claude integration, convert message history and system instructions into the prompt text and `scaffolding` option. Pass structured app context or attachment metadata through the `data` option. Streaming, tool calls, provider-specific message formats, and Claude model behavior require application-level changes.
+> [!NOTE]
+> **What is `xylem`?** `xylem` is Thistle's built-in instruction scaffold: persistent guidance that is added to each prompt to encourage concise answers, careful use of supplied context, checked arithmetic, and clear uncertainty. It is not a model, an AI provider, or a network service. Replace it with your own scaffolding when your app needs a different role or output format.
+
+When migrating an existing hosted-model integration, convert message history and system instructions into the prompt text and `scaffolding` option. Pass structured app context or attachment metadata through the `data` option. Streaming, tool calls, provider-specific message formats, and behavior that depends on a particular hosted model require application-level changes.
 
 ## Add A Model
 
@@ -107,7 +119,7 @@ my-app/
 		chat.ts
 ```
 
-For iOS, CocoaPods copies the selected `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, the setup command copies the same selected files into a generated Android assets directory during the build. You do not need to copy models into `android/app/src/main/assets/` separately. Both platforms can initialize any connected model by filename:
+For iOS, CocoaPods copies the selected `.gguf` files from the application-level `assets/` directory into the app bundle during the build. For Android, the setup command copies the same selected files into a generated Android assets directory during the build. You do not need to copy models into `android/app/src/main/assets/` separately. This keeps model selection in the app project, where the team can make an explicit choice about model size, capabilities, and the device experience. Both platforms can initialize any connected model by filename:
 
 ```tsx
 const model = await Thistle.init('model.gguf');
@@ -121,7 +133,7 @@ The example Metro configuration blocks `.gguf` files from the JavaScript bundle,
 import { Thistle } from 'react-native-thistle';
 
 const model = await Thistle.init('model.gguf', {
-  scaffolding: 'eggwhite',
+  scaffolding: 'xylem',
   maxInputTokens: 0,
   maxContextSize: 0,
   maxOutputTokens: 0,
@@ -133,18 +145,44 @@ const answer = await model.prompt('What is the capital of France?');
 console.log(answer);
 ```
 
-`scaffolding` is optional persistent guidance applied to every prompt. The built-in `eggwhite` preset provides conservative assistant behavior, evidence-aware answers, arithmetic checking, and attachment handling. You can also pass your own scaffolding string. `maxInputTokens`, `maxContextSize`, `maxOutputTokens`, and `maxReasoningTokens` are numeric runtime limits. Falsy values such as `0`, `undefined`, and `null` mean no explicit limit; the model's own context capacity remains the hard upper bound. Each setting can be overridden for an individual prompt.
+`scaffolding` is optional persistent guidance applied to every prompt. The built-in `xylem` preset is a general-purpose starting point for an assistant embedded in a mobile app: it encourages concise answers, careful use of supplied context, explicit uncertainty, checked arithmetic, and faithful handling of attachments. The name reflects its role as a transport layer for useful context and instructions between the app and the model. It is guidance, not a new model or a security boundary, so validate sensitive or high-impact output in your application.
+
+You can also pass your own scaffolding string when the app has a more specific job. For example:
+
+```tsx
+const supportModel = await Thistle.init('support.gguf', {
+  scaffolding:
+    'You are a support assistant. Use the supplied product notes, ask for missing account details, and never invent policy or refund information.',
+});
+
+const tutorModel = await Thistle.init('tutor.gguf', {
+  scaffolding:
+    'You are a patient science tutor. Give one step at a time, ask a short checking question, and adapt explanations to the learner level in the supplied context.',
+});
+
+const fieldModel = await Thistle.init('field.gguf', {
+  scaffolding:
+    'You help summarize field observations. Separate observations from interpretation, preserve measurements and units, and mark missing data clearly.',
+});
+
+const extractionModel = await Thistle.init('forms.gguf', {
+  scaffolding:
+    'Extract only the requested fields from the supplied document. Return valid JSON with the requested keys and use null when a value is absent.',
+});
+```
+
+Other useful scaffolds might define a concise travel planner, a recipe assistant that respects dietary constraints, a journaling companion with a reflective tone, or an offline developer-help tool that only answers from an embedded API reference. Keep the scaffold focused on behavior and output format; pass changing facts, user data, and documents through `data` or the prompt instead. `maxInputTokens`, `maxContextSize`, `maxOutputTokens`, and `maxReasoningTokens` are numeric runtime limits. Falsy values such as `0`, `undefined`, and `null` mean no explicit limit; the model's own context capacity remains the hard upper bound. Each setting can be overridden for an individual prompt.
 
 ### Runtime Options
 
-| Option               | Applied when   | Falsy value                                           | Purpose                                                                   |
-| -------------------- | -------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- |
-| `scaffolding`        | Every prompt   | No scaffolding                                        | Persistent system-style guidance; use `eggwhite` for the built-in preset. |
-| `maxInputTokens`     | Each prompt    | No input limit                                        | Rejects prompts whose tokenized input exceeds this value.                 |
-| `maxContextSize`     | Each prompt    | Model context size                                    | Caps the context/KV-cache window used by native inference.                |
-| `maxOutputTokens`    | Each prompt    | Generate until the context is full or the model stops | Caps newly generated tokens.                                              |
-| `maxReasoningTokens` | Each prompt    | No reasoning limit                                    | Reserved for runtimes/models that expose a separate reasoning phase.      |
-| `debug`              | Model instance | Enabled                                               | Logs prepared prompts, outputs, and failures when true.                   |
+| Option               | Applied when   | Falsy value                                           | Purpose                                                               |
+| -------------------- | -------------- | ----------------------------------------------------- | --------------------------------------------------------------------- |
+| `scaffolding`        | Every prompt   | No scaffolding                                        | Persistent system-style guidance; use`xylem` for the built-in preset. |
+| `maxInputTokens`     | Each prompt    | No input limit                                        | Rejects prompts whose tokenized input exceeds this value.             |
+| `maxContextSize`     | Each prompt    | Model context size                                    | Caps the context/KV-cache window used by native inference.            |
+| `maxOutputTokens`    | Each prompt    | Generate until the context is full or the model stops | Caps newly generated tokens.                                          |
+| `maxReasoningTokens` | Each prompt    | No reasoning limit                                    | Reserved for runtimes/models that expose a separate reasoning phase.  |
+| `debug`              | Model instance | Enabled                                               | Logs prepared prompts, outputs, and failures when true.               |
 
 The numeric limits can be passed to `Thistle.init()` as defaults or overridden in `model.prompt(text, options)`. Falsy limits are normalized to no explicit limit; native model/context capacity remains the hard ceiling.
 
@@ -195,7 +233,7 @@ chatModel.unload();
 smallModel.unload();
 ```
 
-Prefer a smaller quantized model when the device has limited memory. A model can require substantially more memory than the size of its file because of runtime buffers and context state.
+Prefer a smaller quantized model when the device has limited memory. A model can require substantially more memory than the size of its file because of runtime buffers and context state. Choosing a model that fits the target hardware is part of making local AI useful and available to more people.
 
 ## Example Chat App
 
@@ -233,7 +271,7 @@ npm run example -- android
 
 ## Current Implementation Status
 
-The JavaScript API, iOS llama.cpp bridge, Metal backend, bundled shader resources, and chat harness are in place:
+The JavaScript API, iOS llama.cpp bridge, Metal backend, bundled shader resources, and chat harness are in place. Together they provide a foundation for building native experiences around local AI while keeping model execution close to the user and under the application's control:
 
 ```ts
 type ThistleModel = {

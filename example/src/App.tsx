@@ -182,7 +182,7 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
     Thistle.init(modelAsset, {
-      scaffolding: 'eggwhite',
+      scaffolding: 'xylem',
       maxContextSize: 2048,
       maxOutputTokens: 300,
     })

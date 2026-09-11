@@ -1,6 +1,6 @@
 {
   "name": "react-native-thistle",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "An intuitive framework for inference at the edge.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -51,7 +51,20 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "local-ai",
+    "on-device-ai",
+    "edge-ai",
+    "offline-ai",
+    "llm",
+    "inference",
+    "gguf",
+    "llama.cpp",
+    "llama-cpp",
+    "machine-learning",
+    "nitro-modules",
+    "react-native-nitro-modules",
+    "metal"
   ],
   "repository": {
     "type": "git",

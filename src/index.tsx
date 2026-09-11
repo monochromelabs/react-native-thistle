@@ -29,7 +29,7 @@ export type ThistlePromptOptions = {
   maxReasoningTokens?: number;
 };
 
-const EGGWHITE_SCAFFOLDING = `You are a helpful assistant inside a mobile application. Answer directly, accurately, and concisely.
+const XYLEM_SCAFFOLDING = `You are a helpful assistant inside a mobile application. Answer directly, accurately, and concisely.
 
 Infer the user's intended question when there is an obvious typo, missing letter, or minor grammar mistake. Correct it silently and answer the intended question; do not repeat the malformed wording or ask for clarification unless multiple interpretations are genuinely possible.
 
@@ -46,8 +46,8 @@ Configuration values below describe the host application's limits and convention
 function resolveScaffolding(
   scaffolding: string | undefined
 ): string | undefined {
-  if (scaffolding === 'eggwhite') {
-    return EGGWHITE_SCAFFOLDING;
+  if (scaffolding === 'xylem') {
+    return XYLEM_SCAFFOLDING;
   }
   return scaffolding;
 }

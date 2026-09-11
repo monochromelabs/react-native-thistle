@@ -19,6 +19,20 @@ const iosScript = path.join(appRoot, 'ios', 'ThistleModelAssets.sh');
 
 const androidGroovyMarker = '// BEGIN THISTLE MODEL ASSETS';
 const iosMarker = '# BEGIN THISTLE MODEL ASSETS';
+const colors = {
+  reset: '\x1b[0m',
+  bold: '\x1b[1m',
+  cyan: '\x1b[36m',
+  green: '\x1b[32m',
+  purple: '\x1b[35m',
+  yellow: '\x1b[33m',
+  red: '\x1b[31m',
+  dim: '\x1b[2m',
+};
+
+function colorize(color, text) {
+  return `${colors[color]}${text}${colors.reset}`;
+}
 
 function getAssetModels() {
   return fs
@@ -85,21 +99,26 @@ function selectModels(availableModels, selectedModels) {
     const render = () => {
       process.stdout.write('\x1b[2J\x1b[H');
       console.log(
-        'Select GGUF models to package (Space toggles, Enter saves):\n'
+        `${colorize('bold', colorize('green', 'Thistle - Local Model Setup Wizard 🪻'))}\n` +
+          'Select GGUF models to package (Space toggles, Enter saves):\n'
       );
       choices.forEach((choice, index) => {
         const marker =
           choice === 'None'
             ? selected.size === 0
-              ? '[x]'
-              : '[ ]'
+              ? '●'
+              : '○'
             : selected.has(choice)
-              ? '[x]'
-              : '[ ]';
-        const pointer = index === cursor ? '>' : ' ';
-        console.log(`${pointer} ${marker} ${choice}`);
+              ? '●'
+              : '○';
+        const pointer = index === cursor ? colorize('purple', '>') : ' ';
+        const label = choice === 'None' ? colorize('yellow', choice) : choice;
+        const checked = marker === '●' ? colorize('green', marker) : marker;
+        console.log(`${pointer} ${checked} ${label}`);
       });
-      console.log('\nUse Up/Down arrows, Space, then Enter.');
+      console.log(
+        `\n${colorize('dim', 'Use Up/Down arrows, Space, then Enter.')}`
+      );
     };
 
     const finish = (models) => {
@@ -153,6 +172,28 @@ function selectModels(availableModels, selectedModels) {
 
     process.stdin.on('keypress', onKeypress);
     render();
+  });
+}
+
+function pressAnyKey() {
+  if (!process.stdin.isTTY || !process.stdout.isTTY) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const readline = require('readline');
+    readline.emitKeypressEvents(process.stdin);
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+
+    const onKeypress = () => {
+      process.stdin.setRawMode(false);
+      process.stdin.removeListener('keypress', onKeypress);
+      process.stdin.pause();
+      resolve();
+    };
+
+    process.stdin.on('keypress', onKeypress);
   });
 }
 
@@ -318,19 +359,22 @@ function main() {
   return selectModels(availableModels, configuredModels).then(
     (selectedModels) => {
       writeSelectedModels(selectedModels);
+      console.log(`\n${colorize('bold', colorize('cyan', 'Setup complete'))}`);
       console.log(
-        `Created or verified ${path.relative(appRoot, assetsDirectory)}/`
+        `${colorize('green', 'Created')} or verified ${path.relative(appRoot, assetsDirectory)}/`
       );
       console.log(
         selectedModels.length === 0
-          ? 'No GGUF models are connected.'
-          : `Connected GGUF models: ${selectedModels.join(', ')}`
+          ? colorize('yellow', 'No GGUF models are connected.')
+          : `${colorize('green', 'Connected GGUF models:')} ${selectedModels.join(', ')}`
       );
-      console.log(setupAndroid(selectedModels));
-      console.log(setupIos(selectedModels));
+      console.log(colorize('green', setupAndroid(selectedModels)));
+      console.log(colorize('green', setupIos(selectedModels)));
       console.log(
-        '\nRun pod install and rebuild the app after changing model selections.'
+        `\n${colorize('yellow', 'Run pod install and rebuild the app after changing model selections.')}`
       );
+      console.log(`\n${colorize('bold', 'Press any key to continue...')}`);
+      return pressAnyKey();
     }
   );
 }
