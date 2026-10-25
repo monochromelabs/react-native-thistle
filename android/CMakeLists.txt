@@ -16,16 +16,25 @@ set(LLAMA_USE_PREBUILT_UI OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(../cpp/llama.cpp ${CMAKE_CURRENT_BINARY_DIR}/llama-build EXCLUDE_FROM_ALL)
 
+file(GLOB THISTLE_JINJA_SOURCES ../cpp/thistle/vendor/*.cpp)
+
 # Define C++ library and add all sources
 add_library(${PACKAGE_NAME} SHARED
         src/main/cpp/cpp-adapter.cpp
-        src/main/cpp/ThistleBridge.cpp)
+        src/main/cpp/ThistleBridge.cpp
+        ../cpp/thistle/ThistleEngine.cpp
+        ${THISTLE_JINJA_SOURCES})
 
 # Add Nitrogen specs :)
 include(${CMAKE_SOURCE_DIR}/../nitrogen/generated/android/thistle+autolinking.cmake)
 
 # Set up local includes
-include_directories("src/main/cpp" "../cpp")
+include_directories(
+        "src/main/cpp"
+        "../cpp"
+        "../cpp/thistle"
+        "../cpp/llama.cpp/common"
+        "../cpp/llama.cpp/vendor")
 
 find_library(LOG_LIB log)
 

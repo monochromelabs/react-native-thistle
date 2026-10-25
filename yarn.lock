@@ -3452,6 +3452,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-test-renderer@npm:^19.1.0":
+  version: 19.3.0
+  resolution: "@types/react-test-renderer@npm:19.3.0"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/37f5588f698a057a33c1f4d5fd28a042f3df7f29a3554ddebb7f9c8ecd3e5fba085e5b12d14b30734c30b51959ef17544650b2a9704d629d0af251f126d8ae73
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*":
+  version: 19.3.0
+  resolution: "@types/react@npm:19.3.0"
+  dependencies:
+    csstype: "npm:^3.2.2"
+  checksum: 10c0/fbcabf303f935ca9f36ed2dcf81751cf84744098c5a683c8a62a0fa7edd31714b48d5c46b12fd0014f7f2dfe4d9ec6de428a850748eec719a70294e51029551b
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:^19.2.0":
   version: 19.2.18
   resolution: "@types/react@npm:19.2.18"
@@ -9913,6 +9931,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-is@npm:^19.2.3":
+  version: 19.3.1
+  resolution: "react-is@npm:19.3.1"
+  checksum: 10c0/428e02d986d56f1859c57756084489f6d2900fd686905003c405b32f1168738b78772bfa4bb6c706f5ac821199171522c28bf6434281f524f901459390a19606
+  languageName: node
+  linkType: hard
+
 "react-native-builder-bob@npm:^0.43.0":
   version: 0.43.0
   resolution: "react-native-builder-bob@npm:0.43.0"
@@ -9942,6 +9967,16 @@ __metadata:
   bin:
     bob: bin/bob
   checksum: 10c0/b084598636b26bb6f1942c01b77d65d9bea09e148627c61bd9f79145ddb9ec947d7b004a718d14f3db2d4960d67c1e8c70fb0377864d6c3a572f611d489cb970
+  languageName: node
+  linkType: hard
+
+"react-native-encrypted-storage@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-native-encrypted-storage@npm:4.0.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/98de9250a406c5ce21607233a63dcffa727b00d69992825c9b81cb1978c884d0c3fc688811cb515a5628ecf67c5804c1c00047599f34b2591b89447263c4d7cc
   languageName: node
   linkType: hard
 
@@ -10029,14 +10064,17 @@ __metadata:
     "@react-native/metro-config": "npm:0.85.0"
     "@react-native/typescript-config": "npm:0.85.0"
     "@types/react": "npm:^19.2.0"
+    "@types/react-test-renderer": "npm:^19.1.0"
     react: "npm:19.2.3"
     react-native: "npm:0.85.0"
     react-native-builder-bob: "npm:^0.43.0"
+    react-native-encrypted-storage: "npm:^4.0.3"
     react-native-linear-gradient: "npm:^2.8.3"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-monorepo-config: "npm:^0.4.0"
     react-native-nitro-modules: "npm:^0.36.5"
     react-native-svg: "npm:^15.15.5"
+    react-test-renderer: "npm:19.2.3"
   languageName: unknown
   linkType: soft
 
@@ -10075,6 +10113,8 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-nitro-modules: ^0.36.5
+  bin:
+    react-native-thistle: ./scripts/setup.cjs
   languageName: unknown
   linkType: soft
 
@@ -10133,6 +10173,18 @@ __metadata:
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
   checksum: 10c0/875b72ef56b147a131e33f2abd6ec059d1989854b3ff438898e4f9310bfcc73acff709445b7ba843318a953cb9424bcc2c05af2b3d80011cee28f25aef3e2ebb
+  languageName: node
+  linkType: hard
+
+"react-test-renderer@npm:19.2.3":
+  version: 19.2.3
+  resolution: "react-test-renderer@npm:19.2.3"
+  dependencies:
+    react-is: "npm:^19.2.3"
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.3
+  checksum: 10c0/842b82239dbddbc536083a6260c3e1b0507c02a3400bd05879fc19160468fd0f8ab79fec5dceffa6113b131835cc7621212f8415b46ea5156ab66bbfd7e24297
   languageName: node
   linkType: hard
 
@@ -10488,7 +10540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:0.27.0":
+"scheduler@npm:0.27.0, scheduler@npm:^0.27.0":
   version: 0.27.0
   resolution: "scheduler@npm:0.27.0"
   checksum: 10c0/4f03048cb05a3c8fddc45813052251eca00688f413a3cee236d984a161da28db28ba71bd11e7a3dd02f7af84ab28d39fb311431d3b3772fed557945beb00c452

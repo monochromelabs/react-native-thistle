@@ -1,6 +1,6 @@
 {
   "name": "react-native-thistle",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "An intuitive framework for inference at the edge.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -27,6 +27,7 @@
     "*.podspec",
     "react-native.config.js",
     "!ios/build",
+    "!cpp/thistle/tests",
     "!android/build",
     "!android/gradle",
     "!android/gradlew",
@@ -144,6 +145,10 @@
   },
   "jest": {
     "preset": "@react-native/jest-preset",
+    "moduleNameMapper": {
+      "^react$": "<rootDir>/node_modules/react",
+      "^react-native$": "<rootDir>/node_modules/react-native"
+    },
     "testEnvironmentOptions": {
       "customExportConditions": [
         "require",

@@ -15,7 +15,8 @@ Pod::Spec.new do |s|
 
   s.source_files = [
     "ios/**/*.{swift}",
-    "ios/**/*.{m,mm,h}",
+    "cpp/thistle/*.{h,cpp}",
+    "cpp/thistle/vendor/*.cpp",
     "cpp/llama.cpp/src/**/*.{h,cpp}",
     "cpp/llama.cpp/ggml/include/**/*.h",
     "cpp/llama.cpp/ggml/src/*.{h,c,cpp}",
@@ -38,11 +39,14 @@ Pod::Spec.new do |s|
       "$(PODS_TARGET_SRCROOT)/cpp/llama.cpp/include",
       "$(PODS_TARGET_SRCROOT)/cpp/llama.cpp/ggml/include",
       "$(PODS_TARGET_SRCROOT)/cpp/llama.cpp/ggml/src",
+      # Last, so llama.cpp/ggml headers win; needed for jinja/ and nlohmann/.
+      "$(PODS_TARGET_SRCROOT)/cpp/llama.cpp/common",
+      "$(PODS_TARGET_SRCROOT)/cpp/llama.cpp/vendor",
     ].join(" "),
   }
 
   s.frameworks = ["Foundation", "Metal", "MetalKit"]
-  s.public_header_files = ["ios/ThistleBridge.h"]
+  s.public_header_files = ["cpp/thistle/ThistleEngine.h"]
   s.compiler_flags = "-fno-objc-arc"
 
   s.dependency 'React-jsi'

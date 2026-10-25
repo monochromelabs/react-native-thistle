@@ -286,6 +286,8 @@
 				DEVELOPMENT_TEAM = L9UD9A4Z62;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ThistleLite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Thistle Lite";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -297,7 +299,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thistle.example;
+				PRODUCT_BUNDLE_IDENTIFIER = earth.thistle.thistle.lite;
 				PRODUCT_NAME = ThistleLite;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -316,6 +318,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L9UD9A4Z62;
 				INFOPLIST_FILE = ThistleLite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Thistle Lite";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,7 +331,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thistle.example;
+				PRODUCT_BUNDLE_IDENTIFIER = earth.thistle.thistle.lite;
 				PRODUCT_NAME = ThistleLite;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
