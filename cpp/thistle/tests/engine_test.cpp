@@ -42,6 +42,31 @@ static Result run(uint64_t id, const json &request) {
   return result;
 }
 
+static Result stream(uint64_t id, const json &request, std::string &text,
+                     int &chunks) {
+  struct State { std::string &text; int &chunks; } state{text, chunks};
+  char *error = nullptr;
+  char *out = thistle_engine_stream(id, request.dump().c_str(),
+      [](const char *delta, uint64_t length, void *context) {
+        auto &s = *static_cast<State *>(context);
+        const std::string chunk(delta, static_cast<size_t>(length));
+        CHECK(!chunk.empty(), "stream chunks are non-empty");
+        CHECK(json::accept(json(chunk).dump()), "stream chunk is valid UTF-8");
+        s.text += chunk;
+        ++s.chunks;
+      }, &state, &error);
+  Result result;
+  if (out) {
+    result.value = json::parse(out);
+    thistle_engine_free_string(out);
+  }
+  if (error) {
+    result.error = error;
+    thistle_engine_free_string(error);
+  }
+  return result;
+}
+
 static json messages(std::initializer_list<std::pair<const char *, std::string>> list) {
   json out = json::array();
   for (auto &[role, content] : list) out.push_back({{"role", role}, {"content", content}});
@@ -64,6 +89,33 @@ int main(int argc, char **argv) {
     return 1;
   }
   CHECK(thistle_engine_warmup(id, 2048, &error) == 1 && !error, "warmup");
+
+  for (const char *question : {"Write three sentences about the sea.",
+                               "Repeat exactly this emoji and nothing else: 🌍",
+                               "What is 17 * 23? Think step by step."}) {
+    const json request = {{"messages", messages({{"user", question}})},
+                          {"temperature", 0}, {"maxOutputTokens", 64},
+                          {"enableThinking", true}, {"maxReasoningTokens", 8}};
+    std::string text;
+    int chunks = 0;
+    const auto streamed = stream(id, request, text, chunks);
+    const auto completed = run(id, request);
+    CHECK(streamed.error.empty(), "stream succeeds");
+    CHECK(streamed.value == completed.value, "stream metadata matches chat");
+    CHECK(text == streamed.value["text"], "deltas concatenate to final answer");
+    CHECK(text.find("<think>") == std::string::npos, "stream excludes reasoning tags");
+    CHECK(chunks > 0, "stream emits answer chunks");
+    if (std::string(question).find("three sentences") != std::string::npos) {
+      CHECK(chunks > 1, "stream delivers incremental chunks, not a completed reply");
+    }
+  }
+  {
+    char *e = nullptr;
+    char *out = thistle_engine_stream(id, "{}", nullptr, nullptr, &e);
+    CHECK(!out && e && std::string(e).find("[thistle:invalid_argument]") == 0,
+          "stream requires a callback");
+    thistle_engine_free_string(e);
+  }
 
   // Follow-up question relying on real assistant/user history.
   auto r = run(id, {{"messages", messages({{"system", "Answer in one short sentence."},
@@ -125,6 +177,14 @@ int main(int argc, char **argv) {
     char *e = nullptr;
     uint64_t tid = thistle_engine_load_model(path, think, &e);
     CHECK(tid != 0, "thinking template loads");
+    std::string streamed_text;
+    int chunks = 0;
+    auto streamed = stream(tid, {{"messages", messages({{"user", "What is 17 * 23?"}})},
+                                {"maxReasoningTokens", 6}, {"maxOutputTokens", 48},
+                                {"temperature", 0}}, streamed_text, chunks);
+    CHECK(streamed.error.empty() && streamed_text == streamed.value["text"] &&
+          streamed_text.find("think>") == std::string::npos,
+          "stream hides template-opened reasoning and forced closing tag");
     auto t = run(tid, {{"messages", messages({{"user", "What is 17 * 23?"}})}, {"maxReasoningTokens", 6}, {"maxOutputTokens", 48}, {"temperature", 0}});
     std::fprintf(stderr, "forced: %s | %s\n", t.value.dump().c_str(), t.error.c_str());
     CHECK(t.error.empty() && t.value["reasoningTokens"] == 6 && !t.value["reasoning"].get<std::string>().empty() && !t.value["text"].get<std::string>().empty() && t.value["text"].get<std::string>().find("think>") == std::string::npos,
@@ -149,6 +209,26 @@ int main(int argc, char **argv) {
         "broken template reports unsupported_chat_template");
   thistle_engine_free_string(error);
   error = nullptr;
+
+  {
+    char *e = nullptr;
+    uint64_t sid = thistle_engine_load_model(path, "{}", &e);
+    CHECK(sid != 0 && !e, "loads model for streaming cancellation");
+    int chunks = 0;
+    struct State { uint64_t id; int &chunks; } state{sid, chunks};
+    const json request = {{"messages", messages({{"user", "Write a long story about rivers."}})},
+                          {"maxOutputTokens", 64}, {"temperature", 0}};
+    char *out = thistle_engine_stream(sid, request.dump().c_str(),
+        [](const char *, uint64_t, void *context) {
+          auto &s = *static_cast<State *>(context);
+          ++s.chunks;
+          thistle_engine_unload_model(s.id);
+        }, &state, &e);
+    CHECK(!out && e && std::string(e).find("[thistle:model_unloaded]") == 0 &&
+          chunks == 1, "unload from stream callback cancels further chunks");
+    thistle_engine_free_string(out);
+    thistle_engine_free_string(e);
+  }
 
   // Unload during an in-flight prompt cancels it without use-after-free.
   Result inflight;

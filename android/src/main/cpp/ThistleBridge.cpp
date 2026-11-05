@@ -3,6 +3,7 @@
 #include "thistle/ThistleEngine.h"
 
 #include <string>
+#include <stdexcept>
 
 namespace {
 
@@ -93,4 +94,47 @@ Java_com_margelo_nitro_thistle_Thistle_nativePrompt(JNIEnv *env, jobject, jlong 
 extern "C" JNIEXPORT void JNICALL
 Java_com_margelo_nitro_thistle_Thistle_nativeUnloadModel(JNIEnv *, jobject, jlong model_id) {
   thistle_engine_unload_model(static_cast<uint64_t>(model_id));
+}
+
+extern "C" JNIEXPORT jbyteArray JNICALL
+Java_com_margelo_nitro_thistle_Thistle_nativeStream(JNIEnv *env, jobject, jlong model_id,
+                                                 jbyteArray request_json, jobject callback) {
+  const std::string request = to_utf8(env, request_json);
+  jclass callback_class = env->GetObjectClass(callback);
+  jmethodID invoke = env->GetMethodID(callback_class, "invoke", "(Ljava/lang/Object;)Ljava/lang/Object;");
+  env->DeleteLocalRef(callback_class);
+  if (!invoke || env->ExceptionCheck()) return nullptr;
+  struct CallbackContext {
+    JNIEnv *env;
+    jobject callback;
+    jmethodID invoke;
+  } context{env, callback, invoke};
+  char *error = nullptr;
+  char *response = thistle_engine_stream(
+      static_cast<uint64_t>(model_id), request.c_str(),
+      [](const char *text, uint64_t length, void *opaque) {
+        auto &ctx = *static_cast<CallbackContext *>(opaque);
+        auto *bytes = to_bytes(ctx.env, text, static_cast<size_t>(length));
+        if (!bytes || ctx.env->ExceptionCheck()) {
+          throw std::runtime_error("Unable to allocate stream chunk.");
+        }
+        jobject result = ctx.env->CallObjectMethod(ctx.callback, ctx.invoke, bytes);
+        ctx.env->DeleteLocalRef(bytes);
+        if (result) ctx.env->DeleteLocalRef(result);
+        if (ctx.env->ExceptionCheck()) {
+          throw std::runtime_error("Stream callback failed.");
+        }
+      }, &context, &error);
+  if (env->ExceptionCheck()) {
+    thistle_engine_free_string(response);
+    thistle_engine_free_string(error);
+    return nullptr;
+  }
+  if (!response) {
+    throw_error(env, error);
+    return nullptr;
+  }
+  const std::string value(response);
+  thistle_engine_free_string(response);
+  return to_bytes(env, value.data(), value.size());
 }

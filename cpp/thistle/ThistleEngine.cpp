@@ -839,7 +839,9 @@ void warmup(uint64_t model_id, int32_t max_context_size) {
   decode(*model, context.get(), &token, 1);
 }
 
-std::string prompt(uint64_t model_id, const char *request_json) {
+std::string prompt(uint64_t model_id, const char *request_json,
+                   thistle_stream_callback callback = nullptr,
+                   void *callback_context = nullptr) {
   const json request = parse_json_object(request_json, "Prompt request");
   const auto messages = read_messages(request);
   auto model = acquire_model(model_id);
@@ -944,6 +946,36 @@ std::string prompt(uint64_t model_id, const char *request_json) {
   decode(*model, context.get(), prompt_tokens.data(), prompt_tokens.size());
 
   std::string generated;
+  size_t emitted = 0;
+  const auto emit = [&](bool final) {
+    if (!callback) return;
+    std::string answer = generated;
+    const size_t close = generated.find(kThinkClose);
+    if (close != std::string::npos &&
+        (reasoning_started || generated.find(kThinkOpen) < close)) {
+      answer = generated.substr(close + std::strlen(kThinkClose));
+    } else if (reasoning_started || (!final && !reasoning_decided)) {
+      return;
+    }
+    if (!final) {
+      // Never publish a prefix that could become a template stop marker.
+      size_t safe = answer.size();
+      for (const auto &stop : model->formatter.stop_strings) {
+        for (size_t n = 1; n < stop.size() && n <= answer.size(); ++n) {
+          if (answer.compare(answer.size() - n, n, stop, 0, n) == 0) {
+            safe = std::min(safe, answer.size() - n);
+          }
+        }
+      }
+      answer.resize(safe);
+    }
+    answer = sanitize_utf8(trim(answer));
+    if (answer.size() > emitted) {
+      const auto delta = answer.substr(emitted);
+      callback(delta.data(), delta.size(), callback_context);
+      emitted = answer.size();
+    }
+  };
   int64_t completion_tokens = 0;
   int64_t reasoning_tokens = 0;
   std::string finish_reason = "length";
@@ -1003,12 +1035,16 @@ std::string prompt(uint64_t model_id, const char *request_json) {
         in_reasoning = false;
       }
     }
+    emit(false);
     if (completion_tokens >= max_output) {
       break;
     }
     decode(*model, context.get(), pending.data(), pending.size());
   }
 
+  throw_if_unloaded(*model);
+  emit(true);
+  throw_if_unloaded(*model);
   std::string text = generated;
   std::string reasoning;
   const size_t close = generated.find(kThinkClose);
@@ -1112,6 +1148,19 @@ char *thistle_engine_prompt(uint64_t model_id, const char *request_json,
     if (result == nullptr) {
       throw std::bad_alloc();
     }
+    return result;
+  });
+}
+
+char *thistle_engine_stream(uint64_t model_id, const char *request_json,
+                            thistle_stream_callback callback, void *context,
+                            char **error_message) {
+  return guarded(error_message, static_cast<char *>(nullptr), [&] {
+    if (!callback) {
+      throw ThistleError("invalid_argument", "A stream callback is required.");
+    }
+    char *result = copy_string(prompt(model_id, request_json, callback, context));
+    if (!result) throw std::bad_alloc();
     return result;
   });
 }

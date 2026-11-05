@@ -1,6 +1,11 @@
 import Foundation
 import NitroModules
 
+private final class StreamCallback {
+    let onChunk: (String) -> Void
+    init(_ onChunk: @escaping (String) -> Void) { self.onChunk = onChunk }
+}
+
 class ThistleModule: HybridThistleSpec {
     public func loadModel(path: String, optionsJson: String) throws -> Promise<Double> {
         Promise<Double>.parallel {
@@ -47,6 +52,26 @@ class ThistleModule: HybridThistleSpec {
             return
         }
         _ = thistle_engine_unload_model(id)
+    }
+
+    public func stream(modelId: Double, requestJson: String, onChunk: @escaping (String) -> Void) throws -> Promise<String> {
+        let id = try Self.modelId(modelId)
+        return Promise<String>.parallel {
+            let callback = Unmanaged.passRetained(StreamCallback(onChunk))
+            defer { callback.release() }
+            var errorMessage: UnsafeMutablePointer<CChar>?
+            let response = thistle_engine_stream(id, requestJson, { text, length, context in
+                guard let text, let context else { return }
+                let bytes = UnsafeRawBufferPointer(start: text, count: Int(length))
+                Unmanaged<StreamCallback>.fromOpaque(context).takeUnretainedValue().onChunk(String(decoding: bytes, as: UTF8.self))
+            }, callback.toOpaque(), &errorMessage)
+            try Self.throwIfError(errorMessage)
+            guard let response else {
+                throw Self.error("[thistle:internal_error] GGUF streaming failed.")
+            }
+            defer { thistle_engine_free_string(response) }
+            return String(cString: response)
+        }
     }
 
     private static func throwIfError(_ message: UnsafeMutablePointer<CChar>?) throws {

@@ -89,6 +89,12 @@ export type ThistleModel = {
     messages: readonly ThistleMessage[],
     options?: ThistleGenerationOptions
   ): Promise<ThistleCompletion>;
+  /** Streams answer text (not reasoning), then resolves with the final completion. */
+  stream(
+    messages: readonly ThistleMessage[],
+    onChunk: (text: string) => void,
+    options?: ThistleGenerationOptions
+  ): Promise<ThistleCompletion>;
   /** Releases the model. Idempotent; in-flight prompts reject with `model_unloaded`. */
   unload(): void;
   readonly isLoaded: boolean;
@@ -392,9 +398,10 @@ export const Thistle = {
 
     let loaded = true;
 
-    const chat = async (
+    const run = async (
       messages: readonly ThistleMessage[],
-      chatOptions: ThistleGenerationOptions = {}
+      chatOptions: ThistleGenerationOptions = {},
+      onChunk?: (text: string) => void
     ): Promise<ThistleCompletion> => {
       if (!loaded) {
         throw new ThistleError(
@@ -416,7 +423,13 @@ export const Thistle = {
       }
       try {
         const completion = parseCompletion(
-          await ThistleHybridObject.prompt(modelId, JSON.stringify(request))
+          await (onChunk
+            ? ThistleHybridObject.stream(
+                modelId,
+                JSON.stringify(request),
+                onChunk
+              )
+            : ThistleHybridObject.prompt(modelId, JSON.stringify(request)))
         );
         if (debug) {
           console.log('[Thistle] completion:', completion);
@@ -432,10 +445,41 @@ export const Thistle = {
     };
 
     return {
-      chat,
+      chat: (messages, chatOptions) => run(messages, chatOptions),
+      async stream(messages, onChunk, streamOptions) {
+        if (typeof onChunk !== 'function') {
+          throw invalid('onChunk must be a function.');
+        }
+        // Nitro delivers callbacks asynchronously. Keep consumer errors in this
+        // request instead of throwing them on the JS dispatcher.
+        let callbackError: unknown;
+        let callbackFailed = false;
+        let active = true;
+        try {
+          const result = await run(messages, streamOptions, (text) => {
+            if (!active || callbackFailed || !loaded) return;
+            try {
+              onChunk(text);
+            } catch (error) {
+              callbackFailed = true;
+              callbackError = error;
+            }
+          });
+          if (callbackFailed) throw callbackError;
+          if (!loaded) {
+            throw new ThistleError(
+              'model_unloaded',
+              'This model has been unloaded.'
+            );
+          }
+          return result;
+        } finally {
+          active = false;
+        }
+      },
       async prompt(text: string, promptOptions: ThistlePromptOptions = {}) {
         const { data, history = [], ...generation } = promptOptions;
-        const completion = await chat(
+        const completion = await run(
           [...history, { role: 'user', content: buildUserContent(text, data) }],
           generation
         );

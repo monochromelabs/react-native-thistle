@@ -5,6 +5,7 @@ const mockNative = {
   loadModel: jest.fn<ThistleSpec['loadModel']>(),
   warmup: jest.fn<ThistleSpec['warmup']>(),
   prompt: jest.fn<ThistleSpec['prompt']>(),
+  stream: jest.fn<ThistleSpec['stream']>(),
   unloadModel: jest.fn<ThistleSpec['unloadModel']>(),
 };
 
@@ -191,6 +192,120 @@ describe('model.prompt', () => {
     const error = await model.prompt('Hi').catch((e: unknown) => e);
     expect(error).toBeInstanceOf(ThistleError);
     expect(error).toMatchObject({ code: 'context_length_exceeded' });
+  });
+});
+
+describe('model.stream', () => {
+  it('delivers deltas before completion, shares chat options, and returns metadata', async () => {
+    let finish!: () => void;
+    mockNative.stream.mockImplementation((_id, _request, emit) => {
+      emit('Hello');
+      return new Promise((resolve) => {
+        finish = () => {
+          emit('.');
+          resolve(completion('Hello.', { reasoning: 'private' }));
+        };
+      });
+    });
+    const model = await Thistle.init('/m.gguf', {
+      scaffolding: 'Be brief.',
+      maxOutputTokens: 100,
+    });
+    const chunks: string[] = [];
+    const pending = model.stream(
+      [{ role: 'user', content: 'Hi' }],
+      (text) => chunks.push(text),
+      { temperature: 0 }
+    );
+    expect(chunks).toEqual(['Hello']);
+    expect(JSON.parse(mockNative.stream.mock.calls[0]![1])).toEqual({
+      maxOutputTokens: 100,
+      temperature: 0,
+      messages: [
+        { role: 'system', content: 'Be brief.' },
+        { role: 'user', content: 'Hi' },
+      ],
+    });
+    finish();
+    await expect(pending).resolves.toMatchObject({
+      text: 'Hello.',
+      reasoning: 'private',
+      finishReason: 'stop',
+    });
+    expect(chunks.join('')).toBe('Hello.');
+    expect(mockNative.prompt).not.toHaveBeenCalled();
+  });
+
+  it('validates messages and options before calling native', async () => {
+    const model = await Thistle.init('/m.gguf');
+    await expect(model.stream([], () => {})).rejects.toMatchObject({
+      code: 'invalid_argument',
+    });
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], () => {}, { topP: 2 })
+    ).rejects.toMatchObject({ code: 'invalid_argument' });
+    expect(mockNative.stream).not.toHaveBeenCalled();
+  });
+
+  it('maps native errors after partial output', async () => {
+    mockNative.stream.mockImplementation(async (_id, _request, emit) => {
+      emit('Partial');
+      throw new Error('[thistle:decode_failed] Decode failed.');
+    });
+    const model = await Thistle.init('/m.gguf');
+    const chunks: string[] = [];
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], (text) =>
+        chunks.push(text)
+      )
+    ).rejects.toMatchObject({ code: 'decode_failed' });
+    expect(chunks).toEqual(['Partial']);
+  });
+
+  it('rejects consumer errors and ignores subsequent callbacks', async () => {
+    mockNative.stream.mockImplementation(async (_id, _request, emit) => {
+      emit('Hello');
+      emit('.');
+      return completion('Hello.');
+    });
+    const model = await Thistle.init('/m.gguf');
+    const onChunk = jest.fn(() => {
+      throw new Error('Consumer failed');
+    });
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], onChunk)
+    ).rejects.toThrow('Consumer failed');
+    expect(onChunk).toHaveBeenCalledTimes(1);
+  });
+
+  it('suppresses queued chunks after unload and rejects further calls', async () => {
+    const model = await Thistle.init('/m.gguf');
+    mockNative.stream.mockImplementation(async (_id, _request, emit) => {
+      emit('Hello');
+      model.unload();
+      emit('.');
+      throw new Error('[thistle:model_unloaded] Unloaded.');
+    });
+    const onChunk = jest.fn();
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], onChunk)
+    ).rejects.toMatchObject({ code: 'model_unloaded' });
+    expect(onChunk).toHaveBeenCalledTimes(1);
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], onChunk)
+    ).rejects.toMatchObject({ code: 'model_unloaded' });
+    expect(mockNative.stream).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects if a JS callback unloads after native generation has finished', async () => {
+    mockNative.stream.mockImplementation(async (_id, _request, emit) => {
+      emit('Hello.');
+      return completion('Hello.');
+    });
+    const model = await Thistle.init('/m.gguf');
+    await expect(
+      model.stream([{ role: 'user', content: 'Hi' }], () => model.unload())
+    ).rejects.toMatchObject({ code: 'model_unloaded' });
   });
 });
 

@@ -7,6 +7,11 @@ injection, output and context limits, reasoning budgets, built-in and custom
 chat templates, and unload while a prompt is running. By default it builds with
 AddressSanitizer.
 
+Streaming checks compare real-model deltas and final metadata with greedy
+non-streaming completions, including emoji and reasoning opened by the chat
+template. Chunks must be valid UTF-8 and concatenate to the final answer without
+reasoning tags.
+
 ```sh
 cmake -S cpp/thistle/tests -B build/engine-test -DCMAKE_BUILD_TYPE=RelWithDebInfo
 cmake --build build/engine-test --target engine_test -j

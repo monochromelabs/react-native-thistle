@@ -14,6 +14,12 @@ export interface Thistle extends HybridObject<{
   warmup(modelId: number, maxContextSize: number): Promise<void>;
   /** Resolves with a JSON-encoded completion. */
   prompt(modelId: number, requestJson: string): Promise<string>;
+  /** Emits answer text deltas, then resolves with a JSON-encoded completion. */
+  stream(
+    modelId: number,
+    requestJson: string,
+    onChunk: (text: string) => void
+  ): Promise<string>;
   /** Idempotent; cancels in-flight prompts for the model. */
   unloadModel(modelId: number): void;
 }

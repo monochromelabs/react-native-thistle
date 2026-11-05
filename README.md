@@ -28,6 +28,7 @@ The JavaScript API stays small while the native runtime handles tokenization, ll
 - **Independent model instances** so apps can manage multiple local models
 - **Works with standard instruct GGUFs** by rendering the model's own chat template (Jinja), with built-in template fallbacks and overrides
 - **Real multi-turn chat** with `system`, `user`, and `assistant` messages
+- **Streaming answer text** through `model.stream()` for incremental UI and speech
 - **Typed runtime limits** for input, context, output, and reasoning tokens, with safe mobile defaults
 - **Sampling controls** for temperature, top-k, top-p, min-p, repetition penalty, and seed
 - **Typed errors** with stable codes such as `context_length_exceeded`
@@ -109,7 +110,7 @@ const answer = await model.prompt(userMessage);
 > [!NOTE]
 > **What is `xylem`?** `xylem` is Thistle's built-in instruction scaffold: persistent guidance that is added to each prompt to encourage concise answers, careful use of supplied context, checked arithmetic, and clear uncertainty. It is not a model, an AI provider, or a network service. Replace it with your own scaffolding when your app needs a different role or output format.
 
-When migrating an existing hosted-model integration, map system instructions to `scaffolding` (or a `system` message) and pass earlier turns as `history`, or send the whole conversation with `model.chat(messages)`. Pass structured app context or attachment metadata through the `data` option. Streaming, tool calls, images, and behavior that depends on a particular hosted model require application-level changes.
+When migrating an existing hosted-model integration, map system instructions to `scaffolding` (or a `system` message) and pass earlier turns as `history`, or send the whole conversation with `model.chat(messages)`. Use `model.stream(messages, onChunk)` for incremental answer text. Pass structured app context or attachment metadata through the `data` option. Tool calls, images, and behavior that depends on a particular hosted model require application-level changes.
 
 ## Add A Model
 
@@ -174,6 +175,38 @@ result.promptTokens; // also completionTokens, reasoningTokens, contextSize
 ```
 
 `scaffolding` is added as the system message, ahead of any system message you supply. Models whose template has no system role receive it at the start of the first user message.
+
+### Streaming
+
+`stream()` sits alongside `chat()`: it accepts the same messages and generation
+options, emits incremental answer text, and resolves with the same
+`ThistleCompletion` (including reasoning, finish reason, and token counts).
+Existing `chat()` and `prompt()` calls are unchanged.
+
+```tsx
+let answer = '';
+const completion = await model.stream(
+  [{ role: 'user', content: 'Tell me about the ocean.' }],
+  (delta) => {
+    answer += delta;
+    // Update your UI or append delta to a speech input stream here.
+  },
+  { maxOutputTokens: 256 }
+);
+```
+
+Chunks contain answer text, not `<think>` reasoning or template stop markers.
+They are valid UTF-8 text fragments, not necessarily whole tokens, words, or
+sentences. Concatenating the chunks yields `completion.text`. Leading/trailing
+whitespace is trimmed as it is for `chat()`. For natural speech, feed deltas to a
+sentence-buffering TTS stream and finalize it only after `stream()` resolves.
+Keep callbacks synchronous and quick; callback exceptions reject the returned
+promise after native generation settles. Native failures may reject after
+partial output, so discard or mark incomplete text as appropriate. Unloading
+the model cancels generation and suppresses further callbacks for that instance.
+Streaming does not bypass prompt evaluation or reasoning time, and requests on
+the same model remain serialized. Rebuild the native app after upgrading to
+include the streaming bridge.
 
 ### Chat templates and model compatibility
 
@@ -253,7 +286,9 @@ Other useful scaffolds might define a concise travel planner, a recipe assistant
 | `seed`               | Each prompt    | Random                                     | Fixed seed for reproducible sampling.                                                          |
 | `debug`              | Model instance | `false`                                    | Logs prepared requests, outputs, and failures when true.                                       |
 
-Generation options passed to `Thistle.init()` are defaults for that instance; options passed to `prompt()` or `chat()` override them for one call. Invalid values reject with `invalid_argument` before native code runs. For compatibility with earlier releases, `0` or `null` for `maxInputTokens`, `maxContextSize`, or `maxOutputTokens` selects the default.
+ Invalid values reject with `invalid_argument` before native code runs. For compatibility with earlier releases, `0` or `null` for `maxInputTokens`, `maxContextSize`, or `maxOutputTokens` selects the default.
+
+Generation options passed to `Thistle.init()` are defaults for that instance; options passed to `prompt()`, `chat()`, or `stream()` override them for one call. Invalid values reject with `invalid_argument` before native code runs. For compatibility with earlier releases, `0` or `null` for `maxInputTokens`, `maxContextSize`, or `maxOutputTokens` selects the default.
 
 Prompt-specific data can be injected with the `data` option. It is serialized as JSON and placed in the user message, ahead of the request, so it is treated as content rather than instructions:
 
@@ -388,7 +423,7 @@ type ThistleModel = {
 };
 ```
 
-iOS and Android share one C++ engine in `cpp/thistle`, which handles chat templates, tokenization, sampling, limits, and model lifetime. The platform bindings only resolve model paths and move JSON across the bridge on background threads. Native engine tests that run a real GGUF are described in [cpp/thistle/tests/README.md](cpp/thistle/tests/README.md). Streaming, tool calls, and image input are not supported yet.
+iOS and Android share one C++ engine in `cpp/thistle`, which handles chat templates, tokenization, sampling, limits, streaming, and model lifetime. The platform bindings resolve model paths, move JSON across the bridge on background threads, and dispatch streaming text callbacks to JavaScript. Native engine tests that run a real GGUF are described in [cpp/thistle/tests/README.md](cpp/thistle/tests/README.md). Tool calls and image input are not supported yet.
 
 The shared engine wraps the vendored [llama.cpp runtime](cpp/llama.cpp/); it does not replace it. Both [cpp/thistle/](cpp/thistle/) and [cpp/llama.cpp/](cpp/llama.cpp/) are required for native builds.
 

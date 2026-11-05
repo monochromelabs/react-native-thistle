@@ -25,6 +25,15 @@ int32_t thistle_engine_warmup(uint64_t model_id, int32_t max_context_size,
 char *thistle_engine_prompt(uint64_t model_id, const char *request_json,
                             char **error_message);
 
+// Called synchronously on the generation thread with borrowed UTF-8 answer
+// deltas (never reasoning). Do not reenter generation for the same model.
+typedef void (*thistle_stream_callback)(const char *text, uint64_t length,
+                                        void *context);
+// Same request and completion as prompt. callback must not be NULL.
+char *thistle_engine_stream(uint64_t model_id, const char *request_json,
+                            thistle_stream_callback callback, void *context,
+                            char **error_message);
+
 // Idempotent. Returns 1 if a loaded model was released, 0 if the id was
 // unknown or already unloaded. In-flight prompts are cancelled and the model
 // memory is released once they finish.

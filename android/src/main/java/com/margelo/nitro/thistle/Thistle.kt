@@ -35,6 +35,16 @@ class Thistle : HybridThistleSpec() {
     nativeUnloadModel(id)
   }
 
+  override fun stream(modelId: Double, requestJson: String, onChunk: (String) -> Unit): Promise<String> {
+    val id = modelId(modelId)
+    val request = requestJson.toByteArray(Charsets.UTF_8)
+    return Promise.parallel {
+      String(nativeStream(id, request) { bytes ->
+        onChunk(String(bytes, Charsets.UTF_8))
+      }, Charsets.UTF_8)
+    }
+  }
+
   private fun modelId(value: Double): Long {
     if (!value.isFinite() || value < 1 || value > MAX_SAFE_INTEGER || value != Math.rint(value)) {
       throw IllegalArgumentException("[thistle:model_not_loaded] Invalid model id.")
@@ -101,6 +111,7 @@ class Thistle : HybridThistleSpec() {
   private external fun nativeLoadModel(path: ByteArray, optionsJson: ByteArray): Long
   private external fun nativeWarmup(modelId: Long, maxContextSize: Int)
   private external fun nativePrompt(modelId: Long, requestJson: ByteArray): ByteArray
+  private external fun nativeStream(modelId: Long, requestJson: ByteArray, onChunk: (ByteArray) -> Unit): ByteArray
   private external fun nativeUnloadModel(modelId: Long)
 
   private companion object {
