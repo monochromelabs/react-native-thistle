@@ -1,0 +1,36 @@
+earth.thistle.thistle.lite: 46782
+{
+  "started_at": "2026-11-10T01:49:07.171Z",
+  "completed_at": "2026-11-10T01:49:41.686Z",
+  "scope": "iOS Simulator functional integration; not physical-device performance",
+  "device": "856F7E7A-5D68-451B-87DA-63450CE0F61D",
+  "bundle_id": "earth.thistle.thistle.lite",
+  "model": {
+    "file": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+    "sha256": "0cf76814555b8665149075b74ab6b5c1d428ea1d3d01c1918c12012e8d7c9f58"
+  },
+  "sources": {
+    "src/App.tsx": "eda516d05711e39bef2a36e48c156d1706e83a0bd5a4663ad7f3091a728ad93f",
+    "src/protocol.ts": "8fd1c8a246debfa74216cdb83f46ee14802c66a968a17fb7264aca8ac8c9d940",
+    "src/thistle.ts": "ea3224921c87f2a8d3f11ed158c292c0033ee70246a6d7dd058a8eb81970bf74",
+    "src/llama.ts": "62e11b8ad4bd749a954fa7394e811ff1b135d25cb9722eaf57886a026746f29e",
+    "native-run.mjs": "817123c07b933d907869863f35a5f76c3346ad728037043223c16238ce734f20",
+    "package-lock.json": "70398802fe6703896c3b93eb1383f5b87fced876d71ea40dc73a0a0a3e9ca258",
+    "ios/Podfile.lock": "8e6bf0c3984d66cdb533de93c0f18f3ac614890756537fd168896ef86e9addb6"
+  },
+  "results": [
+    {
+      "provider": "thistle",
+      "error": "Error: Empty streaming completion"
+    }
+  ]
+}
+file:///Users/tolu/thistle-environment/thistle-arxiv/Thistle__Democratizing_Inference_at_the_Edge/evaluation/integration-study/native-run.mjs:112
+    throw new Error(
+          ^
+
+Error: Native integration failure; see native-results-thistle.json
+    at file:///Users/tolu/thistle-environment/thistle-arxiv/Thistle__Democratizing_Inference_at_the_Edge/evaluation/integration-study/native-run.mjs:112:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v25.8.0

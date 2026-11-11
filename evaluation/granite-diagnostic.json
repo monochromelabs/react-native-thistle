@@ -1,0 +1,149 @@
+{
+  "started_at": "2026-11-10T06:27:25.322Z",
+  "reason": "Diagnostic retry after original five-minute contract and benchmark timeouts; unchanged executables, requests and five-minute limit.",
+  "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/granite-3.3-2b-instruct-Q4_K_M.gguf",
+  "model_sha256": "ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852",
+  "binaries": {
+    "model_smoke": {
+      "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/model_smoke",
+      "sha256": "993c3a33afe9bfeb818f5a48ab7ac2ea4be8908e5a7f2d51cf37a0447528f43d"
+    },
+    "engine_test": {
+      "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/engine_test",
+      "sha256": "ec8d95aa12f99ff44230634e195589402f3f2cba71b0ddb73f5be0ec5010ded9"
+    },
+    "engine_bench": {
+      "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-benchmark/engine_bench",
+      "sha256": "a4473ebda3fff96ec9eb0340a4d66539601cd786ac47105aa53c50d1be7443b2"
+    }
+  },
+  "runs": [
+    {
+      "target": "engine_bench",
+      "exit_code": 0,
+      "signal": null,
+      "process_error": null,
+      "wall_ms": 33860,
+      "passed_checks": 0,
+      "failed_assertions": [],
+      "log": "granite-diagnostic.engine_bench.log",
+      "measurements": {
+        "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/granite-3.3-2b-instruct-Q4_K_M.gguf",
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+            }
+          ],
+          "temperature": 0,
+          "seed": 42,
+          "maxContextSize": 2048,
+          "maxOutputTokens": 64,
+          "enableThinking": false,
+          "maxReasoningTokens": 0
+        },
+        "trials": [
+          {
+            "index": 0,
+            "elapsed_ms": 3633.269958,
+            "first_answer_delta_ms": 866.228417,
+            "chunks": 64,
+            "stream_matches_completion": true,
+            "end_to_end_tokens_per_second": 17.61498615292269,
+            "completion": {
+              "text": "The river, known as Aeloria, meanders gracefully through the verdant expanse of the Whispering Woods. It begins its journey high in the mountains, where snow-capped peaks meet emerald canopies. As it descends, the water's",
+              "reasoning": "",
+              "finishReason": "length",
+              "promptTokens": 79,
+              "completionTokens": 64,
+              "reasoningTokens": 0,
+              "contextSize": 2048
+            },
+            "memory": {
+              "peak_rss_bytes": 2219868160,
+              "resident_bytes": 1841037312
+            }
+          },
+          {
+            "index": 1,
+            "elapsed_ms": 4299.633583,
+            "first_answer_delta_ms": 1242.342667,
+            "chunks": 64,
+            "stream_matches_completion": true,
+            "end_to_end_tokens_per_second": 14.884989328636008,
+            "completion": {
+              "text": "The river, known as Aeloria, meanders gracefully through the verdant expanse of the Whispering Woods. It begins its journey high in the mountains, where snow-capped peaks meet emerald canopies. As it descends, the water's",
+              "reasoning": "",
+              "finishReason": "length",
+              "promptTokens": 79,
+              "completionTokens": 64,
+              "reasoningTokens": 0,
+              "contextSize": 2048
+            },
+            "memory": {
+              "peak_rss_bytes": 2219868160,
+              "resident_bytes": 1482964992
+            }
+          },
+          {
+            "index": 2,
+            "elapsed_ms": 3724.828375,
+            "first_answer_delta_ms": 1235.169125,
+            "chunks": 64,
+            "stream_matches_completion": true,
+            "end_to_end_tokens_per_second": 17.18199969414698,
+            "completion": {
+              "text": "The river, known as Aeloria, meanders gracefully through the verdant expanse of the Whispering Woods. It begins its journey high in the mountains, where snow-capped peaks meet emerald canopies. As it descends, the water's",
+              "reasoning": "",
+              "finishReason": "length",
+              "promptTokens": 79,
+              "completionTokens": 64,
+              "reasoningTokens": 0,
+              "contextSize": 2048
+            },
+            "memory": {
+              "peak_rss_bytes": 2219868160,
+              "resident_bytes": 1552498688
+            }
+          }
+        ],
+        "memory_before_load": {
+          "peak_rss_bytes": 6389760,
+          "resident_bytes": 6389760
+        },
+        "load_ms": 21423.420584,
+        "memory_after_load": {
+          "peak_rss_bytes": 1122926592,
+          "resident_bytes": 690880512
+        },
+        "warmup_ms": 694.152834,
+        "memory_after_warmup": {
+          "peak_rss_bytes": 2036908032,
+          "resident_bytes": 2035023872
+        },
+        "memory_before_unload": {
+          "peak_rss_bytes": 2219868160,
+          "resident_bytes": 1552498688
+        },
+        "unload_ms": 25.004708,
+        "memory_after_unload": {
+          "peak_rss_bytes": 2219868160,
+          "resident_bytes": 16547840
+        },
+        "unloaded": true
+      }
+    },
+    {
+      "target": "engine_test",
+      "exit_code": 0,
+      "signal": null,
+      "process_error": null,
+      "wall_ms": 124632,
+      "passed_checks": 332,
+      "failed_assertions": [],
+      "log": "granite-diagnostic.engine_test.log"
+    }
+  ],
+  "completed_at": "2026-11-10T06:30:03.849Z"
+}

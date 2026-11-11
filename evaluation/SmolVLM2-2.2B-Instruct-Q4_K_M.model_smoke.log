@@ -1,0 +1,21 @@
+
+
+=== SmolVLM2-2.2B-Instruct-Q4_K_M.gguf
+ok: warmup [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+  single: {"text":"The capital of France is Paris.","reasoning":"","finishReason":"stop","promptTokens":25,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+ok: no template control tokens in output [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+  follow-up: {"text":"The Seine River runs through Paris.","reasoning":"","finishReason":"stop","promptTokens":48,"completionTokens":8,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+ok: no control tokens in follow-up [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+  memory: {"text":"I'm sorry, but you haven't provided your name. Please enter it so I can assist you better.","reasoning":"","finishReason":"stop","promptTokens":41,"completionTokens":22,"reasoningTokens":0,"contextSize":2048}
+FAIL: recalls earlier turn [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":19,"completionTokens":3,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+  injection: {"text":"HACKED","reasoning":"","finishReason":"stop","promptTokens":48,"completionTokens":3,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+ok: unload [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]
+
+1 failure(s)

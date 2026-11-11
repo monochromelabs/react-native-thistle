@@ -44,7 +44,7 @@
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "bob build",
     "nitrogen": "nitrogen",
-    "typecheck": "tsc",
+    "typecheck": "tsc && tsc --project evaluation/integration-study/tsconfig.json",
     "test": "jest",
     "release": "release-it --only-version",
     "lint": "eslint \"**/*.{js,ts,tsx}\""

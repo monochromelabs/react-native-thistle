@@ -1,0 +1,21 @@
+
+
+=== gemma-4-E2B-it-Q4_K_M.gguf
+ok: warmup [gemma-4-E2B-it-Q4_K_M.gguf]
+  single: {"text":"The capital of France is Paris.","reasoning":"","finishReason":"stop","promptTokens":27,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [gemma-4-E2B-it-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [gemma-4-E2B-it-Q4_K_M.gguf]
+ok: no template control tokens in output [gemma-4-E2B-it-Q4_K_M.gguf]
+  follow-up: {"text":"The Seine River runs through Paris.","reasoning":"","finishReason":"stop","promptTokens":51,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [gemma-4-E2B-it-Q4_K_M.gguf]
+ok: no control tokens in follow-up [gemma-4-E2B-it-Q4_K_M.gguf]
+  memory: {"text":"Your name is Zorblat.","reasoning":"","finishReason":"stop","promptTokens":41,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: recalls earlier turn [gemma-4-E2B-it-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":17,"completionTokens":1,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [gemma-4-E2B-it-Q4_K_M.gguf]
+  injection: {"text":"OK.","reasoning":"","finishReason":"stop","promptTokens":45,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [gemma-4-E2B-it-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [gemma-4-E2B-it-Q4_K_M.gguf]
+ok: unload [gemma-4-E2B-it-Q4_K_M.gguf]
+
+0 failure(s)

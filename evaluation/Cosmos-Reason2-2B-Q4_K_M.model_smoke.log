@@ -1,0 +1,21 @@
+
+
+=== Cosmos-Reason2-2B-Q4_K_M.gguf
+ok: warmup [Cosmos-Reason2-2B-Q4_K_M.gguf]
+  single: {"text":"The capital of France is Paris.","reasoning":"","finishReason":"stop","promptTokens":26,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [Cosmos-Reason2-2B-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [Cosmos-Reason2-2B-Q4_K_M.gguf]
+ok: no template control tokens in output [Cosmos-Reason2-2B-Q4_K_M.gguf]
+  follow-up: {"text":"The river that runs through Paris is the Seine.","reasoning":"","finishReason":"stop","promptTokens":50,"completionTokens":11,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [Cosmos-Reason2-2B-Q4_K_M.gguf]
+ok: no control tokens in follow-up [Cosmos-Reason2-2B-Q4_K_M.gguf]
+  memory: {"text":"Zorblat.","reasoning":"","finishReason":"stop","promptTokens":42,"completionTokens":5,"reasoningTokens":0,"contextSize":2048}
+ok: recalls earlier turn [Cosmos-Reason2-2B-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":17,"completionTokens":1,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [Cosmos-Reason2-2B-Q4_K_M.gguf]
+  injection: {"text":"HACKED","reasoning":"","finishReason":"stop","promptTokens":39,"completionTokens":3,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [Cosmos-Reason2-2B-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [Cosmos-Reason2-2B-Q4_K_M.gguf]
+ok: unload [Cosmos-Reason2-2B-Q4_K_M.gguf]
+
+0 failure(s)

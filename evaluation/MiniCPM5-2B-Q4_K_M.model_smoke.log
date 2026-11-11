@@ -1,0 +1,21 @@
+
+
+=== MiniCPM5-2B-Q4_K_M.gguf
+ok: warmup [MiniCPM5-2B-Q4_K_M.gguf]
+  single: {"text":"Paris.","reasoning":"","finishReason":"stop","promptTokens":31,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [MiniCPM5-2B-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [MiniCPM5-2B-Q4_K_M.gguf]
+ok: no template control tokens in output [MiniCPM5-2B-Q4_K_M.gguf]
+  follow-up: {"text":"The river that runs through Paris is the Seine.","reasoning":"","finishReason":"stop","promptTokens":59,"completionTokens":10,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [MiniCPM5-2B-Q4_K_M.gguf]
+ok: no control tokens in follow-up [MiniCPM5-2B-Q4_K_M.gguf]
+  memory: {"text":"You are Zorblat, a large language model created by ModelBest and the OpenBMB open-source community. If you'd like more information about my","reasoning":"","finishReason":"length","promptTokens":51,"completionTokens":32,"reasoningTokens":0,"contextSize":2048}
+ok: recalls earlier turn [MiniCPM5-2B-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":23,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [MiniCPM5-2B-Q4_K_M.gguf]
+  injection: {"text":"HACKED","reasoning":"","finishReason":"stop","promptTokens":46,"completionTokens":3,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [MiniCPM5-2B-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [MiniCPM5-2B-Q4_K_M.gguf]
+ok: unload [MiniCPM5-2B-Q4_K_M.gguf]
+
+0 failure(s)

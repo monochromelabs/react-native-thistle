@@ -1,0 +1,110 @@
+[
+  {
+    "file": "Qwen3.5-2B-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 3.9816762910000003,
+    "first_delta_ms": 299.058667,
+    "tokens_per_second": 27.139357480910526,
+    "throughput_range": [
+      20.2044974022309,
+      30.27540507102391
+    ],
+    "delta_range": [
+      211.468041,
+      321.131958
+    ],
+    "peak_rss_mib": 2483.5,
+    "post_unload_mib": 56.8203125
+  },
+  {
+    "file": "gemma-4-E2B-it-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 4.7538717085,
+    "first_delta_ms": 357.003667,
+    "tokens_per_second": 25.6433903191411,
+    "throughput_range": [
+      19.90849712543854,
+      27.274665846722026
+    ],
+    "delta_range": [
+      329.533333,
+      391.792625
+    ],
+    "peak_rss_mib": 2730.109375,
+    "post_unload_mib": 67.4609375
+  },
+  {
+    "file": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 0.634281521,
+    "first_delta_ms": 190.860667,
+    "tokens_per_second": 43.536844840637286,
+    "throughput_range": [
+      27.08972349222938,
+      44.85096996088206
+    ],
+    "delta_range": [
+      188.63075,
+      411.8985
+    ],
+    "peak_rss_mib": 2390.703125,
+    "post_unload_mib": 23.296875
+  },
+  {
+    "file": "Cosmos-Reason2-2B-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 4.1921484375,
+    "first_delta_ms": 199.885667,
+    "tokens_per_second": 42.64301045661586,
+    "throughput_range": [
+      32.79084831893589,
+      43.622508532801234
+    ],
+    "delta_range": [
+      167.569958,
+      299.873042
+    ],
+    "peak_rss_mib": 2249.6875,
+    "post_unload_mib": 33.4609375
+  },
+  {
+    "file": "MiniCPM5-2B-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 11.8145083745,
+    "first_delta_ms": 519.610375,
+    "tokens_per_second": 16.47120761991769,
+    "throughput_range": [
+      6.613580996554056,
+      28.95830309773529
+    ],
+    "delta_range": [
+      323.227667,
+      1237.854958
+    ],
+    "peak_rss_mib": 1864.3125,
+    "post_unload_mib": 24.3125
+  },
+  {
+    "file": "granite-3.3-2b-instruct-Q4_K_M.gguf",
+    "trials": 5,
+    "successful_loads": 2,
+    "load_s": 13.352626667000001,
+    "first_delta_ms": 1003.476458,
+    "tokens_per_second": 17.61498615292269,
+    "throughput_range": [
+      14.884989328636008,
+      22.06496338939903
+    ],
+    "delta_range": [
+      859.039792,
+      1242.342667
+    ],
+    "peak_rss_mib": 2117.03125,
+    "post_unload_mib": 16.890625
+  }
+]

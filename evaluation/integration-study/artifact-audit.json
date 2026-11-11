@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-11-10T02:13:12.898Z",
+  "scope": "Matched text-chat artifact, source responsibilities, and adapter validation",
+  "versions": {
+    "react": "19.2.3",
+    "react-native": "0.85.0",
+    "react-native-nitro-modules": "0.36.5",
+    "react-native-thistle": "0.6.0",
+    "llama.rn": "0.12.9"
+  },
+  "source_provenance": {
+    "thistle_revision": "359b43c6cb04a78cb8722710cf89c8c10508b0f5",
+    "llama_rn_npm_git_head": "2a20c13e6665cc7278f68c6b2b5819899d0e84fd",
+    "note": "The Thistle checkout includes the previously documented native evaluation tooling; installed source hashes below identify the inspected API."
+  },
+  "files": {
+    "src/App.tsx": {
+      "sha256": "39ebd6cb07dfca7c68752425b25ce0fdef39d013c8c5026c149fefec0e42a9f2"
+    },
+    "src/protocol.ts": {
+      "sha256": "9200b5784b0941cb7778be61cfe0188130a1c817571b4c1e921733d4178cc9a6"
+    },
+    "src/thistle.ts": {
+      "sha256": "ea3224921c87f2a8d3f11ed158c292c0033ee70246a6d7dd058a8eb81970bf74"
+    },
+    "src/llama.ts": {
+      "sha256": "62e11b8ad4bd749a954fa7394e811ff1b135d25cb9722eaf57886a026746f29e"
+    },
+    "src/usage.ts": {
+      "sha256": "d1b48f0b5af4b8811a8b878a83623ba1924d3c579b795ce4869ddb425fe816c5"
+    },
+    "tests/adapters.test.cjs": {
+      "sha256": "baca02b767ceda7d35e169ff774ff02c981ca2c5dc35c0aafe61feac5c8958c3"
+    },
+    "package.json": {
+      "sha256": "e60e43d9754a54c22b2ae2a3ad3f0ee3d45db0de314b93f1e0974317f930f28c"
+    },
+    "package-lock.json": {
+      "sha256": "70398802fe6703896c3b93eb1383f5b87fced876d71ea40dc73a0a0a3e9ca258"
+    },
+    "ios/Podfile": {
+      "sha256": "a0ddec85c8a3a13abbf9410feb4dfc975c375ca26541fce6fc4d71cfadc0b41e"
+    },
+    "ios/Podfile.lock": {
+      "sha256": "18aa57ffe981e0f9865e0edbc88f6cc68f82a44b9c8708a965627d25fb406756"
+    },
+    "pod-lock-thistle.lock": {
+      "sha256": "8e6bf0c3984d66cdb533de93c0f18f3ac614890756537fd168896ef86e9addb6"
+    },
+    "pod-lock-llama.lock": {
+      "sha256": "18aa57ffe981e0f9865e0edbc88f6cc68f82a44b9c8708a965627d25fb406756"
+    },
+    "react-native.config.js": {
+      "sha256": "755a56a2594ba84dae3b67e0677c753d055c1f42215d11c160962c35b6ddf16f"
+    },
+    "metro.config.js": {
+      "sha256": "188415098a535e3f0412874e0407505d1f51cfef65d2a7ed162ba659fa52df1b"
+    },
+    "ios/ThistleLite/AppDelegate.swift": {
+      "sha256": "b7edd0a25ca6df132da06337be26166c56a6443cce55175f3dbcf5651198d290"
+    },
+    "node_modules/llama.rn/src/index.ts": {
+      "sha256": "51f9879b20e75fbafae1b6fbbe00241fe6c3adf83ab9232df4945600f2d62e16"
+    },
+    "node_modules/llama.rn/src/types.ts": {
+      "sha256": "eeb8bb96c1f258eb5e089108a7d9718ff2d0d996f791a63abed87e4441719c15"
+    },
+    "node_modules/llama.rn/README.md": {
+      "sha256": "37c7aa6e38a16619531665f3797d4a0365817a4a04ecb13fdefc2f4f6d80ccfb"
+    },
+    "node_modules/react-native-thistle/src/index.tsx": {
+      "sha256": "71a5f91801a615ae8f7cda341cf0cce6dca398fc8f484f2ada66f44178970824"
+    },
+    "node_modules/react-native-thistle/scripts/setup.cjs": {
+      "sha256": "d9408875481a3afd59bed800a9e0806e9373d11db1a5209442cffcacaf0f9f19"
+    }
+  },
+  "adapters": {
+    "thistle": {
+      "physical_lines": 25,
+      "nonblank_lines": 23
+    },
+    "llama": {
+      "physical_lines": 32,
+      "nonblank_lines": 30
+    }
+  },
+  "interpretation": "Line counts depend on this shared shell and adapter contract. They do not measure usability, integration time, runtime speed, or general feature coverage."
+}

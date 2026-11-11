@@ -1,0 +1,108 @@
+earth.thistle.thistle.lite: 49554
+{
+  "started_at": "2026-11-10T01:56:58.408Z",
+  "completed_at": "2026-11-10T01:57:38.565Z",
+  "scope": "iOS Simulator functional integration; not physical-device performance",
+  "device": "856F7E7A-5D68-451B-87DA-63450CE0F61D",
+  "bundle_id": "earth.thistle.thistle.lite",
+  "model": {
+    "file": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+    "sha256": "0cf76814555b8665149075b74ab6b5c1d428ea1d3d01c1918c12012e8d7c9f58"
+  },
+  "sources": {
+    "src/App.tsx": "39ebd6cb07dfca7c68752425b25ce0fdef39d013c8c5026c149fefec0e42a9f2",
+    "src/protocol.ts": "9200b5784b0941cb7778be61cfe0188130a1c817571b4c1e921733d4178cc9a6",
+    "src/thistle.ts": "ea3224921c87f2a8d3f11ed158c292c0033ee70246a6d7dd058a8eb81970bf74",
+    "src/llama.ts": "62e11b8ad4bd749a954fa7394e811ff1b135d25cb9722eaf57886a026746f29e",
+    "native-run.mjs": "817123c07b933d907869863f35a5f76c3346ad728037043223c16238ce734f20",
+    "package-lock.json": "70398802fe6703896c3b93eb1383f5b87fced876d71ea40dc73a0a0a3e9ca258",
+    "ios/Podfile.lock": "18aa57ffe981e0f9865e0edbc88f6cc68f82a44b9c8708a965627d25fb406756"
+  },
+  "results": [
+    {
+      "provider": "llama",
+      "result": {
+        "first": {
+          "text": " The Seine River flows through Paris, France. It is the longest river in the country and has been an important part of Parisian life for centuries. The river is also a major tourist attraction, with many famous landmarks along its banks, such as the Eiffel Tower, Notre-Dame Cathedral, and the Lou",
+          "tokens": 63
+        },
+        "second": {
+          "text": " The forest beside the Seine River is a lush and vibrant ecosystem, teeming with life. The trees, mostly deciduous, reach towering heights, their canopies a vibrant green, a testament to the rich biodiversity of the region. The underbrush is a tapestry of ferns, mosses, and wildflowers, their colors a kale",
+          "tokens": 63
+        },
+        "chunks": [
+          " The",
+          " forest",
+          " beside",
+          " the",
+          " Se",
+          "ine",
+          " River",
+          " is",
+          " a",
+          " lush",
+          " and",
+          " vibrant",
+          " ecosystem",
+          ",",
+          " teeming",
+          " with",
+          " life",
+          ".",
+          " The",
+          " trees",
+          ",",
+          " mostly",
+          " deciduous",
+          ",",
+          " reach",
+          " towering",
+          " heights",
+          ",",
+          " their",
+          " can",
+          "opies",
+          " a",
+          " vibrant",
+          " green",
+          ",",
+          " a",
+          " testament",
+          " to",
+          " the",
+          " rich",
+          " biodiversity",
+          " of",
+          " the",
+          " region",
+          ".",
+          " The",
+          " under",
+          "brush",
+          " is",
+          " a",
+          " tapestry",
+          " of",
+          " ferns",
+          ",",
+          " moss",
+          "es",
+          ",",
+          " and",
+          " wildflowers",
+          ",",
+          " their",
+          " colors",
+          " a",
+          " kale"
+        ],
+        "checks": {
+          "nonemptyChat": true,
+          "nonemptyStream": true,
+          "exactReconstruction": true,
+          "outputBudget": true
+        }
+      }
+    }
+  ]
+}

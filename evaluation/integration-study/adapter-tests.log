@@ -1,0 +1,24 @@
+
+> thistle-integration-study@1.0.0 test
+> node --test tests/*.test.cjs
+
+✔ thistle: maps model path, context and generation limits (97.5555ms)
+✔ thistle: preserves transcript and reconstructs deltas (24.876541ms)
+✔ thistle: propagates native failures and releases (25.823917ms)
+✔ thistle: detects mismatched streaming output and releases (14.231125ms)
+✔ thistle: detects a missing stream and releases (21.292333ms)
+✔ thistle: detects excessive output and releases (14.633ms)
+✔ llama: maps model path, context and generation limits (11.027916ms)
+✔ llama: preserves transcript and reconstructs deltas (9.78525ms)
+✔ llama: propagates native failures and releases (15.505708ms)
+✔ llama: detects mismatched streaming output and releases (17.20825ms)
+✔ llama: detects a missing stream and releases (13.992709ms)
+✔ llama: detects excessive output and releases (19.93475ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 550.434417

@@ -42,3 +42,14 @@ target_include_directories(model_smoke PRIVATE
   ${LLAMA_DIR}/common
   ${LLAMA_DIR}/vendor)
 target_link_libraries(model_smoke PRIVATE llama ggml)
+
+add_executable(engine_bench
+  engine_bench.cpp
+  ${THISTLE_CPP}/ThistleEngine.cpp
+  ${THISTLE_VENDOR})
+target_include_directories(engine_bench PRIVATE
+  ${THISTLE_CPP}
+  ${LLAMA_DIR}/src
+  ${LLAMA_DIR}/common
+  ${LLAMA_DIR}/vendor)
+target_link_libraries(engine_bench PRIVATE llama ggml)

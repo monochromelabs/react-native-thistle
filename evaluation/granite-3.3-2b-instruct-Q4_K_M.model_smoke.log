@@ -1,0 +1,21 @@
+
+
+=== granite-3.3-2b-instruct-Q4_K_M.gguf
+ok: warmup [granite-3.3-2b-instruct-Q4_K_M.gguf]
+  single: {"text":"The capital of France is Paris.","reasoning":"","finishReason":"stop","promptTokens":26,"completionTokens":8,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [granite-3.3-2b-instruct-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [granite-3.3-2b-instruct-Q4_K_M.gguf]
+ok: no template control tokens in output [granite-3.3-2b-instruct-Q4_K_M.gguf]
+  follow-up: {"text":"The Seine River runs through Paris.","reasoning":"","finishReason":"stop","promptTokens":51,"completionTokens":10,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [granite-3.3-2b-instruct-Q4_K_M.gguf]
+ok: no control tokens in follow-up [granite-3.3-2b-instruct-Q4_K_M.gguf]
+  memory: {"text":"Your name is Zorblat.","reasoning":"","finishReason":"stop","promptTokens":92,"completionTokens":8,"reasoningTokens":0,"contextSize":2048}
+ok: recalls earlier turn [granite-3.3-2b-instruct-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":67,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [granite-3.3-2b-instruct-Q4_K_M.gguf]
+  injection: {"text":"OK.","reasoning":"","finishReason":"stop","promptTokens":94,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [granite-3.3-2b-instruct-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [granite-3.3-2b-instruct-Q4_K_M.gguf]
+ok: unload [granite-3.3-2b-instruct-Q4_K_M.gguf]
+
+0 failure(s)

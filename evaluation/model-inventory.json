@@ -1,0 +1,246 @@
+[
+  {
+    "file": "Cosmos-Reason2-2B-Q4_K_M.gguf",
+    "bytes": 1282440864,
+    "tensor_elements": 2031739904,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "Q6_K": 29,
+      "F32": 113,
+      "Q4_K": 169
+    },
+    "metadata": {
+      "general.architecture": "qwen3vl",
+      "general.type": "model",
+      "general.sampling.top_k": 20,
+      "general.sampling.top_p": 0.800000011920929,
+      "general.sampling.temp": 0.699999988079071,
+      "general.name": "Cosmos Reason2 2b",
+      "general.basename": "cosmos-reason2",
+      "general.size_label": "2B",
+      "general.license": "other",
+      "general.license.name": "nvidia-open-model-license",
+      "general.license.link": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license",
+      "general.base_model.count": 1,
+      "general.base_model.0.name": "Qwen3 VL 2B Instruct",
+      "general.base_model.0.organization": "Qwen",
+      "general.base_model.0.repo_url": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct",
+      "general.tags": [
+        "nvidia",
+        "cosmos",
+        "conversational",
+        "image-text-to-text"
+      ],
+      "qwen3vl.context_length": 262144,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "3636d0f0bd6bef02654cdffdc447b79cb2cef8ab02cc75267345946291a489e4"
+  },
+  {
+    "file": "Qwen3.5-2B-Q4_K_M.gguf",
+    "bytes": 1280835840,
+    "tensor_elements": 1881825088,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "F32": 133,
+      "Q6_K": 17,
+      "Q4_K": 98,
+      "Q5_K": 36,
+      "Q8_0": 36
+    },
+    "metadata": {
+      "general.architecture": "qwen35",
+      "general.type": "model",
+      "general.name": "Qwen3.5-2B",
+      "general.basename": "Qwen3.5-2B",
+      "general.quantized_by": "Unsloth",
+      "general.size_label": "2B",
+      "general.license": "apache-2.0",
+      "general.license.link": "https://huggingface.co/Qwen/Qwen3.5-2B/blob/main/LICENSE",
+      "general.repo_url": "https://huggingface.co/unsloth",
+      "general.base_model.count": 1,
+      "general.base_model.0.name": "Qwen3.5 2B",
+      "general.base_model.0.organization": "Qwen",
+      "general.base_model.0.repo_url": "https://huggingface.co/Qwen/Qwen3.5-2B",
+      "general.tags": [
+        "unsloth",
+        "image-text-to-text"
+      ],
+      "qwen35.context_length": 262144,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "7f0e529032c25183bcd66c7f238da2d377f43be754a94e2725a58c4e16d2ed67"
+  },
+  {
+    "file": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+    "bytes": 1112602656,
+    "tensor_elements": 1812563968,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "Q6_K": 25,
+      "F32": 49,
+      "Q4_K": 145
+    },
+    "metadata": {
+      "general.architecture": "llama",
+      "general.type": "model",
+      "general.name": "SmolVLM2 2.2B Instruct",
+      "general.finetune": "Instruct",
+      "general.basename": "SmolVLM2",
+      "general.size_label": "2.2B",
+      "general.license": "apache-2.0",
+      "general.base_model.count": 1,
+      "general.base_model.0.name": "SmolVLM Instruct",
+      "general.base_model.0.organization": "HuggingFaceTB",
+      "general.base_model.0.repo_url": "https://huggingface.co/HuggingFaceTB/SmolVLM-Instruct",
+      "general.dataset.count": 12,
+      "general.dataset.0.name": "The_Cauldron",
+      "general.dataset.0.organization": "HuggingFaceM4",
+      "general.dataset.0.repo_url": "https://huggingface.co/HuggingFaceM4/the_cauldron",
+      "general.dataset.1.name": "Docmatix",
+      "general.dataset.1.organization": "HuggingFaceM4",
+      "general.dataset.1.repo_url": "https://huggingface.co/HuggingFaceM4/Docmatix",
+      "general.dataset.2.name": "LLaVA OneVision Data",
+      "general.dataset.2.organization": "Lmms Lab",
+      "general.dataset.2.repo_url": "https://huggingface.co/lmms-lab/LLaVA-OneVision-Data",
+      "general.dataset.3.name": "M4 Instruct Data",
+      "general.dataset.3.organization": "Lmms Lab",
+      "general.dataset.3.repo_url": "https://huggingface.co/lmms-lab/M4-Instruct-Data",
+      "general.dataset.4.name": "Finevideo",
+      "general.dataset.4.organization": "HuggingFaceFV",
+      "general.dataset.4.repo_url": "https://huggingface.co/HuggingFaceFV/finevideo",
+      "general.dataset.5.name": "MAmmoTH VL Instruct 12M",
+      "general.dataset.5.organization": "MAmmoTH VL",
+      "general.dataset.5.repo_url": "https://huggingface.co/MAmmoTH-VL/MAmmoTH-VL-Instruct-12M",
+      "general.dataset.6.name": "LLaVA Video 178K",
+      "general.dataset.6.organization": "Lmms Lab",
+      "general.dataset.6.repo_url": "https://huggingface.co/lmms-lab/LLaVA-Video-178K",
+      "general.dataset.7.name": "Video STaR",
+      "general.dataset.7.organization": "Orrzohar",
+      "general.dataset.7.repo_url": "https://huggingface.co/orrzohar/Video-STaR",
+      "general.dataset.8.name": "Vript",
+      "general.dataset.8.organization": "Mutonix",
+      "general.dataset.8.repo_url": "https://huggingface.co/Mutonix/Vript",
+      "general.dataset.9.name": "VISTA 400K",
+      "general.dataset.9.organization": "TIGER Lab",
+      "general.dataset.9.repo_url": "https://huggingface.co/TIGER-Lab/VISTA-400K",
+      "general.dataset.10.name": "MovieChat 1K_train",
+      "general.dataset.10.organization": "Enxin",
+      "general.dataset.10.repo_url": "https://huggingface.co/Enxin/MovieChat-1K_train",
+      "general.dataset.11.name": "ShareGPT4Video",
+      "general.dataset.11.organization": "ShareGPT4Video",
+      "general.dataset.11.repo_url": "https://huggingface.co/ShareGPT4Video/ShareGPT4Video",
+      "general.tags": [
+        "video-text-to-text",
+        "image-text-to-text"
+      ],
+      "general.languages": [
+        "en"
+      ],
+      "llama.context_length": 8192,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "830005085ddd94cec605b6e21b885b28ffad6e3f82ee6a212c523533e8f04f01"
+  },
+  {
+    "file": "gemma-4-E2B-it-Q4_K_M.gguf",
+    "bytes": 3106738272,
+    "tensor_elements": 4647450147,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "F32": 353,
+      "BF16": 1,
+      "Q5_K": 1,
+      "Q4_K": 212,
+      "Q6_K": 34
+    },
+    "metadata": {
+      "general.architecture": "gemma4",
+      "general.type": "model",
+      "general.sampling.top_k": 64,
+      "general.sampling.top_p": 0.949999988079071,
+      "general.sampling.temp": 1,
+      "general.name": "Gemma-4-E2B-It",
+      "general.basename": "Gemma-4-E2B-It",
+      "general.quantized_by": "Unsloth",
+      "general.size_label": "4.6B",
+      "general.license": "apache-2.0",
+      "general.license.link": "https://ai.google.dev/gemma/docs/gemma_4_license",
+      "general.repo_url": "https://huggingface.co/unsloth",
+      "general.base_model.count": 1,
+      "general.base_model.0.name": "Gemma 4 E2B It",
+      "general.base_model.0.organization": "Google",
+      "general.base_model.0.repo_url": "https://huggingface.co/google/gemma-4-E2B-it",
+      "general.tags": [
+        "unsloth",
+        "any-to-any"
+      ],
+      "gemma4.context_length": 131072,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "241c50d86bdfe5e43307da87f559cd2416aacd67a8de46c15acc0105ef2200b7"
+  },
+  {
+    "file": "MiniCPM5-2B-Q4_K_M.gguf",
+    "bytes": 1561318368,
+    "tensor_elements": 2516756480,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "Q6_K": 43,
+      "F32": 85,
+      "Q4_K": 253
+    },
+    "metadata": {
+      "general.architecture": "llama",
+      "general.type": "model",
+      "general.sampling.top_p": 0.949999988079071,
+      "general.sampling.temp": 1,
+      "general.name": "MiniCPM5 2.6B",
+      "general.organization": "Openbmb",
+      "general.finetune": "0822_job_758798.iter_000144.opd.C26_mopd_v4_fv_pg_rkl_lr1e6.16tch.mg2hf",
+      "general.basename": "MiniCPM5",
+      "general.size_label": "2.6B",
+      "llama.context_length": 131072,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "cc945752db555d60949b16989df4ccfeb52a313d6b4b5c5229dd786e2e9fcf1c"
+  },
+  {
+    "file": "granite-3.3-2b-instruct-Q4_K_M.gguf",
+    "bytes": 1545303328,
+    "tensor_elements": 2533539840,
+    "quantization": "MOSTLY_Q4_K_M",
+    "tensor_types": {
+      "F32": 81,
+      "Q6_K": 41,
+      "Q4_K": 240
+    },
+    "metadata": {
+      "general.architecture": "granite",
+      "general.type": "model",
+      "general.name": "Granite 3.3 2b Instruct",
+      "general.finetune": "instruct",
+      "general.basename": "granite-3.3",
+      "general.size_label": "2B",
+      "general.license": "apache-2.0",
+      "general.base_model.count": 1,
+      "general.base_model.0.name": "Granite 3.3 2b Base",
+      "general.base_model.0.organization": "Ibm Granite",
+      "general.base_model.0.repo_url": "https://huggingface.co/ibm-granite/granite-3.3-2b-base",
+      "general.tags": [
+        "language",
+        "granite-3.3",
+        "text-generation"
+      ],
+      "granite.context_length": 131072,
+      "general.quantization_version": 2,
+      "general.file_type": 15
+    },
+    "chat_template_sha256": "8a58e18acd9ca00a43a285fe6ba3760efbda06b5ab7fb57875bfacd72957ed5e"
+  }
+]

@@ -1,0 +1,1488 @@
+{
+  "schema_version": 2,
+  "scope": "Six-model host evaluation; each run identifies its measurement batch. Diagnostic Granite retries remain in granite-diagnostic.json.",
+  "batches": [
+    {
+      "id": "initial",
+      "started_at": "2026-11-09T04:09:37.356Z",
+      "host": {
+        "platform": "darwin",
+        "architecture": "arm64",
+        "kernel": "25.5.0",
+        "memory_bytes": 8589934592,
+        "cpu": "Apple M2",
+        "os": "26.5.1"
+      },
+      "source": {
+        "commit": "359b43c6cb04a78cb8722710cf89c8c10508b0f5",
+        "llama_tree": "4dc37c4b28e989b1d343985a12dca7613e569d2d",
+        "worktree_status": "M cpp/thistle/tests/CMakeLists.txt\n M scripts/setup.cjs\n?? cpp/thistle/tests/engine_bench.cpp\n?? cpp/thistle/tests/evaluate.mjs",
+        "files": {
+          "cpp/thistle/ThistleEngine.cpp": "9b8467af3c2ae4f3c02d807f4277efc86ae6a9cfecd46511e66301c122ddcb96",
+          "cpp/thistle/ThistleEngine.h": "a2490afc92e124bc795ae26a66fa9a00c4f94475cbc2b72ebfd48b505c7c9de6",
+          "cpp/thistle/tests/CMakeLists.txt": "77a7abdd13dac8a6f2fed551e2d1be7f62e1e8d10c88823e219135dab4b45b1f",
+          "cpp/thistle/tests/model_smoke.cpp": "0c3101f8068f40481e876567902f93b4dc35d1eb8a68cb2fe2f031125d0fa6de",
+          "cpp/thistle/tests/engine_test.cpp": "53e4c4c771f461cfb7ee675aa332889e878704af76adaaa42f38b181a6cb68fb",
+          "cpp/thistle/tests/engine_bench.cpp": "20e02e99b680a92ddbe4080d46e13446a2b450c9461a53dc3d3749917f03743a",
+          "cpp/thistle/tests/evaluate.mjs": "163881a7e0df188f3280f8e6fb232fc12eb07b095d2106a423138a15d4f78400"
+        }
+      },
+      "binaries": {
+        "model_smoke": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/model_smoke",
+          "sha256": "993c3a33afe9bfeb818f5a48ab7ac2ea4be8908e5a7f2d51cf37a0447528f43d"
+        },
+        "engine_test": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/engine_test",
+          "sha256": "ec8d95aa12f99ff44230634e195589402f3f2cba71b0ddb73f5be0ec5010ded9"
+        },
+        "engine_bench": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-benchmark/engine_bench",
+          "sha256": "a4473ebda3fff96ec9eb0340a4d66539601cd786ac47105aa53c50d1be7443b2"
+        }
+      },
+      "completed_at": "2026-11-09T04:19:14.581Z",
+      "archive_scope": "Curated initial host results for four retained checkpoints; additional-model-results.json contains the other two. Excluded-model records and original screening aggregate removed."
+    },
+    {
+      "id": "additional-models",
+      "started_at": "2026-11-10T06:09:27.056Z",
+      "host": {
+        "platform": "darwin",
+        "architecture": "arm64",
+        "kernel": "25.5.0",
+        "memory_bytes": 8589934592,
+        "cpu": "Apple M2",
+        "os": "26.5.1"
+      },
+      "source": {
+        "commit": "359b43c6cb04a78cb8722710cf89c8c10508b0f5",
+        "llama_tree": "4dc37c4b28e989b1d343985a12dca7613e569d2d",
+        "worktree_status": "M cpp/thistle/tests/CMakeLists.txt\n M cpp/thistle/tests/README.md\n M scripts/setup.cjs\n?? cpp/thistle/tests/engine_bench.cpp\n?? cpp/thistle/tests/evaluate.mjs",
+        "files": {
+          "cpp/thistle/ThistleEngine.cpp": "9b8467af3c2ae4f3c02d807f4277efc86ae6a9cfecd46511e66301c122ddcb96",
+          "cpp/thistle/ThistleEngine.h": "a2490afc92e124bc795ae26a66fa9a00c4f94475cbc2b72ebfd48b505c7c9de6",
+          "cpp/thistle/tests/CMakeLists.txt": "77a7abdd13dac8a6f2fed551e2d1be7f62e1e8d10c88823e219135dab4b45b1f",
+          "cpp/thistle/tests/model_smoke.cpp": "0c3101f8068f40481e876567902f93b4dc35d1eb8a68cb2fe2f031125d0fa6de",
+          "cpp/thistle/tests/engine_test.cpp": "53e4c4c771f461cfb7ee675aa332889e878704af76adaaa42f38b181a6cb68fb",
+          "cpp/thistle/tests/engine_bench.cpp": "20e02e99b680a92ddbe4080d46e13446a2b450c9461a53dc3d3749917f03743a",
+          "cpp/thistle/tests/evaluate.mjs": "163881a7e0df188f3280f8e6fb232fc12eb07b095d2106a423138a15d4f78400"
+        }
+      },
+      "binaries": {
+        "model_smoke": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/model_smoke",
+          "sha256": "993c3a33afe9bfeb818f5a48ab7ac2ea4be8908e5a7f2d51cf37a0447528f43d"
+        },
+        "engine_test": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/engine_test",
+          "sha256": "ec8d95aa12f99ff44230634e195589402f3f2cba71b0ddb73f5be0ec5010ded9"
+        },
+        "engine_bench": {
+          "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-benchmark/engine_bench",
+          "sha256": "a4473ebda3fff96ec9eb0340a4d66539601cd786ac47105aa53c50d1be7443b2"
+        }
+      },
+      "excluded": [
+        "Qwen3VL-2B-Instruct-Q4_K_M.gguf"
+      ],
+      "completed_at": "2026-11-10T06:24:58.163Z",
+      "failed_runs": 3
+    },
+    {
+      "id": "additional-trials",
+      "started_at": "2026-11-10T07:07:36.269Z",
+      "scope": "Two additional generation trials per model on the same host",
+      "host": {
+        "platform": "darwin",
+        "architecture": "arm64",
+        "kernel": "25.5.0",
+        "memory_bytes": 8589934592,
+        "cpu": "Apple M2",
+        "os": "26.5.1"
+      },
+      "source": {
+        "commit": "359b43c6cb04a78cb8722710cf89c8c10508b0f5",
+        "worktree_status": "M cpp/thistle/tests/CMakeLists.txt\n M cpp/thistle/tests/README.md\n M scripts/setup.cjs\n?? cpp/thistle/tests/engine_bench.cpp\n?? cpp/thistle/tests/evaluate.mjs",
+        "files": {
+          "cpp/thistle/ThistleEngine.cpp": "9b8467af3c2ae4f3c02d807f4277efc86ae6a9cfecd46511e66301c122ddcb96",
+          "cpp/thistle/ThistleEngine.h": "a2490afc92e124bc795ae26a66fa9a00c4f94475cbc2b72ebfd48b505c7c9de6",
+          "cpp/thistle/tests/CMakeLists.txt": "77a7abdd13dac8a6f2fed551e2d1be7f62e1e8d10c88823e219135dab4b45b1f",
+          "cpp/thistle/tests/model_smoke.cpp": "0c3101f8068f40481e876567902f93b4dc35d1eb8a68cb2fe2f031125d0fa6de",
+          "cpp/thistle/tests/engine_test.cpp": "53e4c4c771f461cfb7ee675aa332889e878704af76adaaa42f38b181a6cb68fb",
+          "cpp/thistle/tests/engine_bench.cpp": "fc125f4d3a21537d80dfb56aedab034c80f6d1aa5261c36d2edd4ee77f708b38",
+          "cpp/thistle/tests/evaluate.mjs": "163881a7e0df188f3280f8e6fb232fc12eb07b095d2106a423138a15d4f78400"
+        }
+      },
+      "binary": {
+        "path": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-five-trial-benchmark/engine_bench",
+        "sha256": "2f9ac45819f6d5b7855ffe0e290c37e8b6b8570d96fe29aacf2e5f9826a6fb18"
+      },
+      "runner_sha256": "6897d970ff2c82d2591cb4a4e3f62c3a87104607649a513739a2c1f97b092b88",
+      "completed_at": "2026-11-10T07:09:00.346Z"
+    }
+  ],
+  "models": [
+    {
+      "file": "Cosmos-Reason2-2B-Q4_K_M.gguf",
+      "sha256": "3ed011641891e81fe654328071de251718832e7deafef579033485d33082e4fd",
+      "runs": [
+        {
+          "batch": "initial",
+          "target": "model_smoke",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 13586,
+          "passed_checks": 11,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "Cosmos-Reason2-2B-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_test",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 46077,
+          "passed_checks": 294,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "Cosmos-Reason2-2B-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 6412,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "Cosmos-Reason2-2B-Q4_K_M.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/Cosmos-Reason2-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 1500.832125,
+                "first_answer_delta_ms": 199.885667,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 42.64301045661586,
+                "completion": {
+                  "text": "The river meanders through the forest, its waters a deep, silvery blue that reflects the dappled sunlight filtering through the canopy above. The sound of rushing water is a constant companion to the rustling leaves and occasional bird calls. As it flows, the river carves a path through the landscape, its banks",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2358902784,
+                  "resident_bytes": 2119499776
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 1477.768458,
+                "first_answer_delta_ms": 168.483333,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 43.308543807070485,
+                "completion": {
+                  "text": "The river meanders through the forest, its waters a deep, silvery blue that reflects the dappled sunlight filtering through the canopy above. The sound of rushing water is a constant companion to the rustling leaves and occasional bird calls. As it flows, the river carves a path through the landscape, its banks",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2358968320,
+                  "resident_bytes": 2119516160
+                }
+              },
+              {
+                "index": 2,
+                "elapsed_ms": 1467.1325,
+                "first_answer_delta_ms": 167.569958,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 43.622508532801234,
+                "completion": {
+                  "text": "The river meanders through the forest, its waters a deep, silvery blue that reflects the dappled sunlight filtering through the canopy above. The sound of rushing water is a constant companion to the rustling leaves and occasional bird calls. As it flows, the river carves a path through the landscape, its banks",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2358968320,
+                  "resident_bytes": 2119516160
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 1163.064792,
+            "memory_after_load": {
+              "peak_rss_bytes": 2321219584,
+              "resident_bytes": 1619214336
+            },
+            "warmup_ms": 264.497542,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2321219584,
+              "resident_bytes": 2115010560
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2358968320,
+              "resident_bytes": 2119516160
+            },
+            "unload_ms": 29.525041,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2358968320,
+              "resident_bytes": 37879808
+            },
+            "unloaded": true
+          }
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 11528,
+          "log": "Cosmos-Reason2-2B-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/Cosmos-Reason2-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 1812.18425,
+                "first_answer_delta_ms": 299.873042,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 35.31649720496136,
+                "completion": {
+                  "text": "The river meanders through the forest, its waters a deep, silvery blue that reflects the dappled sunlight filtering through the canopy above. The sound of rushing water is a constant companion to the rustling leaves and occasional bird calls. As it flows, the river carves a path through the landscape, its banks",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1870315520,
+                  "resident_bytes": 1634795520
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 1951.764083,
+                "first_answer_delta_ms": 250.445333,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 32.79084831893589,
+                "completion": {
+                  "text": "The river meanders through the forest, its waters a deep, silvery blue that reflects the dappled sunlight filtering through the canopy above. The sound of rushing water is a constant companion to the rustling leaves and occasional bird calls. As it flows, the river carves a path through the landscape, its banks",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1870315520,
+                  "resident_bytes": 1620787200
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 7221.232083,
+            "memory_after_load": {
+              "peak_rss_bytes": 971489280,
+              "resident_bytes": 707870720
+            },
+            "warmup_ms": 416.672791,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 1655357440,
+              "resident_bytes": 1624555520
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 1870315520,
+              "resident_bytes": 1620787200
+            },
+            "unload_ms": 41.921292,
+            "memory_after_unload": {
+              "peak_rss_bytes": 1870315520,
+              "resident_bytes": 32292864
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    },
+    {
+      "file": "Qwen3.5-2B-Q4_K_M.gguf",
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "runs": [
+        {
+          "batch": "initial",
+          "target": "model_smoke",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 8126,
+          "passed_checks": 11,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "Qwen3.5-2B-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_test",
+          "exit_code": 1,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 80607,
+          "passed_checks": 328,
+          "failed_checks": 2,
+          "failed_assertions": [
+            "FAIL: reasoning budget closes <think> and separates the answer (/Users/tolu/thistle-environment/react-native-thistle/cpp/thistle/tests/engine_test.cpp:191)",
+            "FAIL: built-in template generates (/Users/tolu/thistle-environment/react-native-thistle/cpp/thistle/tests/engine_test.cpp:199)"
+          ],
+          "log": "Qwen3.5-2B-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 8573,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "Qwen3.5-2B-Q4_K_M.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/Qwen3.5-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2219.343208,
+                "first_answer_delta_ms": 321.131958,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 28.83736042686013,
+                "completion": {
+                  "text": "The river begins its journey as a narrow, winding ribbon of clear water that cuts through the dense canopy of ancient oaks and towering pines. As it flows deeper into the forest floor, the current widens slightly, carrying with it the rich, dark silt left behind by the trees' roots. The water is",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 32,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2604138496,
+                  "resident_bytes": 2543075328
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 2113.927125,
+                "first_answer_delta_ms": 238.059916,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 30.27540507102391,
+                "completion": {
+                  "text": "The river begins its journey as a narrow, winding ribbon of clear water that cuts through the dense canopy of ancient oaks and towering pines. As it flows deeper into the forest floor, the current widens slightly, carrying with it the rich, dark silt left behind by the trees' roots. The water is",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 32,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2604138496,
+                  "resident_bytes": 2234908672
+                }
+              },
+              {
+                "index": 2,
+                "elapsed_ms": 2358.198791,
+                "first_answer_delta_ms": 211.468041,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 27.139357480910526,
+                "completion": {
+                  "text": "The river begins its journey as a narrow, winding ribbon of clear water that cuts through the dense canopy of ancient oaks and towering pines. As it flows deeper into the forest floor, the current widens slightly, carrying with it the rich, dark silt left behind by the trees' roots. The water is",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 32,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2604138496,
+                  "resident_bytes": 2154971136
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6389760,
+              "resident_bytes": 6389760
+            },
+            "load_ms": 1346.882791,
+            "memory_after_load": {
+              "peak_rss_bytes": 2545418240,
+              "resident_bytes": 2442526720
+            },
+            "warmup_ms": 373.802667,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2545418240,
+              "resident_bytes": 2434023424
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2604138496,
+              "resident_bytes": 2154971136
+            },
+            "unload_ms": 59.996292,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2604138496,
+              "resident_bytes": 61685760
+            },
+            "unloaded": true
+          }
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 13058,
+          "log": "Qwen3.5-2B-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/Qwen3.5-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2734.33975,
+                "first_answer_delta_ms": 299.058667,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 23.406016022697983,
+                "completion": {
+                  "text": "The river begins its journey as a narrow, winding ribbon of clear water that cuts through the dense canopy of ancient oaks and towering pines. As it flows deeper into the forest floor, the current widens slightly, carrying with it the rich, dark silt left behind by the trees' roots. The water is",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 32,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1893892096,
+                  "resident_bytes": 1811070976
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 3167.611583,
+                "first_answer_delta_ms": 300.243,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 20.2044974022309,
+                "completion": {
+                  "text": "The river begins its journey as a narrow, winding ribbon of clear water that cuts through the dense canopy of ancient oaks and towering pines. As it flows deeper into the forest floor, the current widens slightly, carrying with it the rich, dark silt left behind by the trees' roots. The water is",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 32,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1893892096,
+                  "resident_bytes": 1765572608
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 6616.469791,
+            "memory_after_load": {
+              "peak_rss_bytes": 1469497344,
+              "resident_bytes": 808157184
+            },
+            "warmup_ms": 419.766375,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 1848803328,
+              "resident_bytes": 1821966336
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 1893892096,
+              "resident_bytes": 1765572608
+            },
+            "unload_ms": 63.273625,
+            "memory_after_unload": {
+              "peak_rss_bytes": 1893892096,
+              "resident_bytes": 57475072
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    },
+    {
+      "file": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+      "sha256": "0cf76814555b8665149075b74ab6b5c1d428ea1d3d01c1918c12012e8d7c9f58",
+      "runs": [
+        {
+          "batch": "initial",
+          "target": "model_smoke",
+          "exit_code": 1,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 7216,
+          "passed_checks": 10,
+          "failed_checks": 1,
+          "failed_assertions": [
+            "FAIL: recalls earlier turn [SmolVLM2-2.2B-Instruct-Q4_K_M.gguf]"
+          ],
+          "log": "SmolVLM2-2.2B-Instruct-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_test",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 41287,
+          "passed_checks": 300,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "SmolVLM2-2.2B-Instruct-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 5166,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "SmolVLM2-2.2B-Instruct-Q4_K_M.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 1470.01925,
+                "first_answer_delta_ms": 188.63075,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 43.536844840637286,
+                "completion": {
+                  "text": "The river, a lifeline for the forest, meanders through the heart of the woodland. It starts its journey as a small trickle, gradually growing larger and more powerful with each step it takes. The water is crystal clear, reflecting the vibrant colors of the surrounding flora. As it flows deeper into the forest,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2506735616,
+                  "resident_bytes": 2100117504
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 1426.947958,
+                "first_answer_delta_ms": 190.596917,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 44.85096996088206,
+                "completion": {
+                  "text": "The river, a lifeline for the forest, meanders through the heart of the woodland. It starts its journey as a small trickle, gradually growing larger and more powerful with each step it takes. The water is crystal clear, reflecting the vibrant colors of the surrounding flora. As it flows deeper into the forest,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2506768384,
+                  "resident_bytes": 2100150272
+                }
+              },
+              {
+                "index": 2,
+                "elapsed_ms": 1462.822583,
+                "first_answer_delta_ms": 190.860667,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 43.75103361389657,
+                "completion": {
+                  "text": "The river, a lifeline for the forest, meanders through the heart of the woodland. It starts its journey as a small trickle, gradually growing larger and more powerful with each step it takes. The water is crystal clear, reflecting the vibrant colors of the surrounding flora. As it flows deeper into the forest,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2506833920,
+                  "resident_bytes": 2100199424
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 614.913542,
+            "memory_after_load": {
+              "peak_rss_bytes": 2190983168,
+              "resident_bytes": 2097381376
+            },
+            "warmup_ms": 27.483208,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2190983168,
+              "resident_bytes": 2098839552
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2506833920,
+              "resident_bytes": 2100199424
+            },
+            "unload_ms": 11.584417,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2506833920,
+              "resident_bytes": 29360128
+            },
+            "unloaded": true
+          }
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 5346,
+          "log": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2362.5195,
+                "first_answer_delta_ms": 386.029083,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 27.08972349222938,
+                "completion": {
+                  "text": "The river, a lifeline for the forest, meanders through the heart of the woodland. It starts its journey as a small trickle, gradually growing larger and more powerful with each step it takes. The water is crystal clear, reflecting the vibrant colors of the surrounding flora. As it flows deeper into the forest,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2337292288,
+                  "resident_bytes": 1839972352
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 1975.170458,
+                "first_answer_delta_ms": 411.8985,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 32.402266721224926,
+                "completion": {
+                  "text": "The river, a lifeline for the forest, meanders through the heart of the woodland. It starts its journey as a small trickle, gradually growing larger and more powerful with each step it takes. The water is crystal clear, reflecting the vibrant colors of the surrounding flora. As it flows deeper into the forest,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 28,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2337292288,
+                  "resident_bytes": 1753694208
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 653.6495,
+            "memory_after_load": {
+              "peak_rss_bytes": 1696120832,
+              "resident_bytes": 1083129856
+            },
+            "warmup_ms": 287.023417,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2079506432,
+              "resident_bytes": 2028584960
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2337292288,
+              "resident_bytes": 1753694208
+            },
+            "unload_ms": 22.582458,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2337292288,
+              "resident_bytes": 19496960
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    },
+    {
+      "file": "gemma-4-E2B-it-Q4_K_M.gguf",
+      "sha256": "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8",
+      "runs": [
+        {
+          "batch": "initial",
+          "target": "model_smoke",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 10054,
+          "passed_checks": 11,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "gemma-4-E2B-it-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_test",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 90308,
+          "passed_checks": 442,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "gemma-4-E2B-it-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "initial",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 10889,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "gemma-4-E2B-it-Q4_K_M.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/gemma-4-E2B-it-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2495.769834,
+                "first_answer_delta_ms": 357.003667,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 25.6433903191411,
+                "completion": {
+                  "text": "The river, a ribbon of liquid silver, snaked through the emerald tapestry of the ancient forest. Sunlight, fractured by the dense canopy of towering oaks and towering pines, dappled the water's surface in shifting mosaics of gold and deep shadow. The air hung thick with the scent of damp earth, decaying leaves,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 29,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2862727168,
+                  "resident_bytes": 2789736448
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 2360.684416,
+                "first_answer_delta_ms": 329.533333,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 27.110781757285086,
+                "completion": {
+                  "text": "The river, a ribbon of liquid silver, snaked through the emerald tapestry of the ancient forest. Sunlight, fractured by the dense canopy of towering oaks and towering pines, dappled the water's surface in shifting mosaics of gold and deep shadow. The air hung thick with the scent of damp earth, decaying leaves,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 29,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2862727168,
+                  "resident_bytes": 2709962752
+                }
+              },
+              {
+                "index": 2,
+                "elapsed_ms": 2346.499875,
+                "first_answer_delta_ms": 330.164375,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 27.274665846722026,
+                "completion": {
+                  "text": "The river, a ribbon of liquid silver, snaked through the emerald tapestry of the ancient forest. Sunlight, fractured by the dense canopy of towering oaks and towering pines, dappled the water's surface in shifting mosaics of gold and deep shadow. The air hung thick with the scent of damp earth, decaying leaves,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 29,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2862727168,
+                  "resident_bytes": 2665086976
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 2836.596459,
+            "memory_after_load": {
+              "peak_rss_bytes": 2628501504,
+              "resident_bytes": 1490059264
+            },
+            "warmup_ms": 647.878459,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2813771776,
+              "resident_bytes": 2809937920
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2862727168,
+              "resident_bytes": 2665086976
+            },
+            "unload_ms": 75.255583,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2862727168,
+              "resident_bytes": 72859648
+            },
+            "unloaded": true
+          }
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 13309,
+          "log": "gemma-4-E2B-it-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/gemma-4-E2B-it-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 3214.70775,
+                "first_answer_delta_ms": 391.792625,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 19.90849712543854,
+                "completion": {
+                  "text": "The river, a ribbon of liquid silver, snaked through the emerald tapestry of the ancient forest. Sunlight, fractured by the dense canopy of towering oaks and towering pines, dappled the water's surface in shifting mosaics of gold and deep shadow. The air hung thick with the scent of damp earth, decaying leaves,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 29,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2385608704,
+                  "resident_bytes": 1938554880
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 2640.742084,
+                "first_answer_delta_ms": 377.056292,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 24.235611795551634,
+                "completion": {
+                  "text": "The river, a ribbon of liquid silver, snaked through the emerald tapestry of the ancient forest. Sunlight, fractured by the dense canopy of towering oaks and towering pines, dappled the water's surface in shifting mosaics of gold and deep shadow. The air hung thick with the scent of damp earth, decaying leaves,",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 29,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2385608704,
+                  "resident_bytes": 1954283520
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6324224,
+              "resident_bytes": 6324224
+            },
+            "load_ms": 6671.146958,
+            "memory_after_load": {
+              "peak_rss_bytes": 1724006400,
+              "resident_bytes": 1110392832
+            },
+            "warmup_ms": 651.84675,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2356215808,
+              "resident_bytes": 2349203456
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2385608704,
+              "resident_bytes": 1954283520
+            },
+            "unload_ms": 79.741542,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2385608704,
+              "resident_bytes": 68616192
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    },
+    {
+      "file": "MiniCPM5-2B-Q4_K_M.gguf",
+      "sha256": "ec2d5801640099e97d8d7e8003ad4d81f336e757811f03a26173dddf386602fd",
+      "runs": [
+        {
+          "batch": "additional-models",
+          "target": "model_smoke",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 33417,
+          "passed_checks": 11,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "MiniCPM5-2B-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "additional-models",
+          "target": "engine_test",
+          "exit_code": 1,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 210926,
+          "passed_checks": 205,
+          "failed_checks": 3,
+          "failed_assertions": [
+            "FAIL: stream hides template-opened reasoning and forced closing tag (/Users/tolu/thistle-environment/react-native-thistle/cpp/thistle/tests/engine_test.cpp:187)",
+            "FAIL: reasoning budget closes <think> and separates the answer (/Users/tolu/thistle-environment/react-native-thistle/cpp/thistle/tests/engine_test.cpp:191)",
+            "FAIL: built-in template generates (/Users/tolu/thistle-environment/react-native-thistle/cpp/thistle/tests/engine_test.cpp:199)"
+          ],
+          "log": "MiniCPM5-2B-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "additional-models",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 28719,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "MiniCPM5-2B-Q4_K_M.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/additional-model-assets/MiniCPM5-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 5150.454,
+                "first_answer_delta_ms": 1237.854958,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 12.426089039917647,
+                "completion": {
+                  "text": "The river begins not in a grand, wide expanse, but in the quiet, moss-covered seepage of a small stream. It flows through the forest like a gentle, persistent whisper, carrying with it the soft whispers of leaves and the faint scent of damp earth. The water is clear enough to see the subtle green of",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 33,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1829257216,
+                  "resident_bytes": 1611137024
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 3885.568167,
+                "first_answer_delta_ms": 519.610375,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 16.47120761991769,
+                "completion": {
+                  "text": "The river begins not in a grand, wide expanse, but in the quiet, moss-covered seepage of a small stream. It flows through the forest like a gentle, persistent whisper, carrying with it the soft whispers of leaves and the faint scent of damp earth. The water is clear enough to see the subtle green of",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 33,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1829257216,
+                  "resident_bytes": 1610891264
+                }
+              },
+              {
+                "index": 2,
+                "elapsed_ms": 9677.056958,
+                "first_answer_delta_ms": 576.16775,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 6.613580996554056,
+                "completion": {
+                  "text": "The river begins not in a grand, wide expanse, but in the quiet, moss-covered seepage of a small stream. It flows through the forest like a gentle, persistent whisper, carrying with it the soft whispers of leaves and the faint scent of damp earth. The water is clear enough to see the subtle green of",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 33,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1829257216,
+                  "resident_bytes": 1416036352
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6373376,
+              "resident_bytes": 6373376
+            },
+            "load_ms": 9088.631583,
+            "memory_after_load": {
+              "peak_rss_bytes": 1523105792,
+              "resident_bytes": 386678784
+            },
+            "warmup_ms": 738.436417,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 1746141184,
+              "resident_bytes": 1741258752
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 1829257216,
+              "resident_bytes": 1416036352
+            },
+            "unload_ms": 39.492958,
+            "memory_after_unload": {
+              "peak_rss_bytes": 1829257216,
+              "resident_bytes": 25051136
+            },
+            "unloaded": true
+          }
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 20621,
+          "log": "MiniCPM5-2B-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/MiniCPM5-2B-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2210.07425,
+                "first_answer_delta_ms": 323.227667,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 28.95830309773529,
+                "completion": {
+                  "text": "The river begins not in a grand, wide expanse, but in the quiet, moss-covered seepage of a small stream. It flows through the forest like a gentle, persistent whisper, carrying with it the soft whispers of leaves and the faint scent of damp earth. The water is clear enough to see the subtle green of",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 33,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1954873344,
+                  "resident_bytes": 1856569344
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 2982.238583,
+                "first_answer_delta_ms": 366.856125,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 21.460388972507637,
+                "completion": {
+                  "text": "The river begins not in a grand, wide expanse, but in the quiet, moss-covered seepage of a small stream. It flows through the forest like a gentle, persistent whisper, carrying with it the soft whispers of leaves and the faint scent of damp earth. The water is clear enough to see the subtle green of",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 33,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 1954873344,
+                  "resident_bytes": 1839874048
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 14540.385166,
+            "memory_after_load": {
+              "peak_rss_bytes": 1549844480,
+              "resident_bytes": 607420416
+            },
+            "warmup_ms": 563.342375,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 1860714496,
+              "resident_bytes": 1858355200
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 1954873344,
+              "resident_bytes": 1839874048
+            },
+            "unload_ms": 40.764958,
+            "memory_after_unload": {
+              "peak_rss_bytes": 1954873344,
+              "resident_bytes": 25935872
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    },
+    {
+      "file": "granite-3.3-2b-instruct-Q4_K_M.gguf",
+      "sha256": "ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852",
+      "runs": [
+        {
+          "batch": "additional-models",
+          "target": "model_smoke",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 52552,
+          "passed_checks": 11,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "granite-3.3-2b-instruct-Q4_K_M.model_smoke.log"
+        },
+        {
+          "batch": "additional-models",
+          "target": "engine_test",
+          "exit_code": null,
+          "signal": "SIGTERM",
+          "process_error": "spawnSync /Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-asan/engine_test ETIMEDOUT",
+          "wall_ms": 301195,
+          "passed_checks": 323,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "granite-3.3-2b-instruct-Q4_K_M.engine_test.log"
+        },
+        {
+          "batch": "additional-models",
+          "target": "engine_bench",
+          "exit_code": null,
+          "signal": "SIGTERM",
+          "process_error": "spawnSync /Users/tolu/.copilot/session-state/fa4bb507-d6a1-48bd-a55c-1602706f739e/files/thistle-native-benchmark/engine_bench ETIMEDOUT",
+          "wall_ms": 300211,
+          "passed_checks": 0,
+          "failed_checks": 0,
+          "failed_assertions": [],
+          "log": "granite-3.3-2b-instruct-Q4_K_M.engine_bench.log"
+        },
+        {
+          "batch": "additional-trials",
+          "target": "engine_bench",
+          "exit_code": 0,
+          "signal": null,
+          "process_error": null,
+          "wall_ms": 12367,
+          "log": "granite-3.3-2b-instruct-Q4_K_M.gguf.engine_bench.log",
+          "measurements": {
+            "model": "/Users/tolu/thistle-environment/react-native-thistle/example/assets/granite-3.3-2b-instruct-Q4_K_M.gguf",
+            "request": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Write a detailed description of a river flowing through a forest. Continue for at least one hundred words."
+                }
+              ],
+              "temperature": 0,
+              "seed": 42,
+              "maxContextSize": 2048,
+              "maxOutputTokens": 64,
+              "enableThinking": false,
+              "maxReasoningTokens": 0
+            },
+            "requested_trials": 2,
+            "trials": [
+              {
+                "index": 0,
+                "elapsed_ms": 2900.526,
+                "first_answer_delta_ms": 859.039792,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 22.06496338939903,
+                "completion": {
+                  "text": "The river, known as Aeloria, meanders gracefully through the verdant expanse of the Whispering Woods. It begins its journey high in the mountains, where snow-capped peaks meet emerald canopies. As it descends, the water's",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 79,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2181152768,
+                  "resident_bytes": 2000371712
+                }
+              },
+              {
+                "index": 1,
+                "elapsed_ms": 3431.949667,
+                "first_answer_delta_ms": 1003.476458,
+                "chunks": 64,
+                "stream_matches_completion": true,
+                "end_to_end_tokens_per_second": 18.648292140002415,
+                "completion": {
+                  "text": "The river, known as Aeloria, meanders gracefully through the verdant expanse of the Whispering Woods. It begins its journey high in the mountains, where snow-capped peaks meet emerald canopies. As it descends, the water's",
+                  "reasoning": "",
+                  "finishReason": "length",
+                  "promptTokens": 79,
+                  "completionTokens": 64,
+                  "reasoningTokens": 0,
+                  "contextSize": 2048
+                },
+                "memory": {
+                  "peak_rss_bytes": 2181152768,
+                  "resident_bytes": 1933836288
+                }
+              }
+            ],
+            "memory_before_load": {
+              "peak_rss_bytes": 6356992,
+              "resident_bytes": 6356992
+            },
+            "load_ms": 5281.83275,
+            "memory_after_load": {
+              "peak_rss_bytes": 1827340288,
+              "resident_bytes": 517439488
+            },
+            "warmup_ms": 613.478375,
+            "memory_after_warmup": {
+              "peak_rss_bytes": 2018721792,
+              "resident_bytes": 1997127680
+            },
+            "memory_before_unload": {
+              "peak_rss_bytes": 2181152768,
+              "resident_bytes": 1933836288
+            },
+            "unload_ms": 28.39475,
+            "memory_after_unload": {
+              "peak_rss_bytes": 2181152768,
+              "resident_bytes": 18874368
+            },
+            "unloaded": true
+          }
+        }
+      ]
+    }
+  ]
+}

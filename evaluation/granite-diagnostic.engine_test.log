@@ -1,0 +1,340 @@
+
+ok: missing file reports model_load_failed
+ok: warmup
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream succeeds
+ok: stream metadata matches chat
+ok: deltas concatenate to final answer
+ok: stream excludes reasoning tags
+ok: stream emits answer chunks
+ok: stream delivers incremental chunks, not a completed reply
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream succeeds
+ok: stream metadata matches chat
+ok: deltas concatenate to final answer
+ok: stream excludes reasoning tags
+ok: stream emits answer chunks
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream succeeds
+ok: stream metadata matches chat
+ok: deltas concatenate to final answer
+ok: stream excludes reasoning tags
+ok: stream emits answer chunks
+ok: stream requires a callback
+follow-up: {"text":"The Seine River runs through Paris.","reasoning":"","finishReason":"stop","promptTokens":45,"completionTokens":10,"reasoningTokens":0,"contextSize":2048} | 
+ok: follow-up uses structured history
+ok: finishReason stop
+ok: default context is 2048, not the 262144 training size
+emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":69,"completionTokens":2,"reasoningTokens":0,"contextSize":2048}
+ok: emoji survives UTF-8 round trip
+ok: maxOutputTokens enforced with finishReason length
+ok: context overflow reports context_length_exceeded
+ok: oversized limit rejected
+ok: output >= context rejected
+ok: last message must be user
+ok: invalid UTF-8 rejected
+ok: special-token text in user content handled
+reasoning: {"text":"17 * 23 can be solved by breaking it down into simpler steps using the distributive property:\n\n1. First, break one of the numbers into two parts: 17 = 10 + 7\n2. Now multiply each part by 23:\n   (10 *","reasoning":"","finishReason":"length","promptTokens":73,"completionTokens":64,"reasoningTokens":0,"contextSize":2048} | 
+ok: reasoning budget respected when used
+ok: thinking template loads
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream chunks are non-empty
+ok: stream chunk is valid UTF-8
+ok: stream hides template-opened reasoning and forced closing tag
+forced: {"text":"<|im_end|>17 and 23, we perform a simple multiplication:\n\n\\[ 17 \\times 23 = (17 \\times","reasoning":"To find the product of","finishReason":"length","promptTokens":35,"completionTokens":48,"reasoningTokens":6,"contextSize":2048} | 
+ok: reasoning budget closes <think> and separates the answer
+ok: built-in chatml override loads
+ok: built-in template generates
+ok: unload override model
+ok: custom Jinja template loads
+ok: broken template reports unsupported_chat_template
+ok: loads model for streaming cancellation
+ok: unload from stream callback cancels further chunks
+ok: unload while prompting
+inflight: [thistle:model_unloaded] The model was unloaded before the prompt finished.
+ok: in-flight prompt rejected with model_unloaded
+ok: double unload is a no-op
+ok: prompt after unload rejected
+ok: warmup after unload rejected
+
+0 failure(s)

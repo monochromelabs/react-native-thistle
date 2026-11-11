@@ -1,0 +1,7 @@
+node_modules/
+build/
+ios/Pods/
+ios/build/
+ios/.xcode.env.local
+**/xcuserdata/
+.DS_Store

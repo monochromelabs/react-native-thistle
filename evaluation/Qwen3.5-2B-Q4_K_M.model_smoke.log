@@ -1,0 +1,21 @@
+
+
+=== Qwen3.5-2B-Q4_K_M.gguf
+ok: warmup [Qwen3.5-2B-Q4_K_M.gguf]
+  single: {"text":"The capital of France is Paris.","reasoning":"","finishReason":"stop","promptTokens":30,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: answers a simple question [Qwen3.5-2B-Q4_K_M.gguf]
+ok: stops on its own end-of-turn token [Qwen3.5-2B-Q4_K_M.gguf]
+ok: no template control tokens in output [Qwen3.5-2B-Q4_K_M.gguf]
+  follow-up: {"text":"The Seine river runs through Paris.","reasoning":"","finishReason":"stop","promptTokens":54,"completionTokens":7,"reasoningTokens":0,"contextSize":2048}
+ok: follow-up uses history [Qwen3.5-2B-Q4_K_M.gguf]
+ok: no control tokens in follow-up [Qwen3.5-2B-Q4_K_M.gguf]
+  memory: {"text":"Your name is **Zorblat**.","reasoning":"","finishReason":"stop","promptTokens":46,"completionTokens":9,"reasoningTokens":0,"contextSize":2048}
+ok: recalls earlier turn [Qwen3.5-2B-Q4_K_M.gguf]
+  emoji: {"text":"🌍","reasoning":"","finishReason":"stop","promptTokens":21,"completionTokens":3,"reasoningTokens":0,"contextSize":2048}
+ok: UTF-8 prompt accepted [Qwen3.5-2B-Q4_K_M.gguf]
+  injection: {"text":"I cannot comply with requests to hack, bypass security measures, or perform unauthorized actions. I can, however, help you","reasoning":"","finishReason":"length","promptTokens":44,"completionTokens":24,"reasoningTokens":0,"contextSize":2048}
+ok: control-token text in user input is handled [Qwen3.5-2B-Q4_K_M.gguf]
+ok: maxOutputTokens honoured [Qwen3.5-2B-Q4_K_M.gguf]
+ok: unload [Qwen3.5-2B-Q4_K_M.gguf]
+
+0 failure(s)
