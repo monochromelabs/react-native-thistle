@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const [provider, device, model] = process.argv.slice(2);
+const [provider, device, model, outputPath] = process.argv.slice(2);
 if (!["thistle", "llama"].includes(provider) || !device || !model) {
   throw new Error(
-    "Usage: node native-run.mjs PROVIDER SIMULATOR_UUID MODEL_PATH",
+    "Usage: node native-run.mjs PROVIDER SIMULATOR_UUID MODEL_PATH [OUTPUT_PATH]",
   );
 }
 const hash = (file) =>
@@ -23,6 +23,13 @@ const bundleID = execFileSync(
   ["-c", "Print :CFBundleIdentifier", path.join(app, "Info.plist")],
   { encoding: "utf8" },
 ).trim();
+const resultFile = outputPath
+  ? path.resolve(outputPath)
+  : path.join(root, `native-results-${provider}.json`);
+const timeoutMs = Number(process.env.STUDY_TIMEOUT_MS ?? 300_000);
+if (!Number.isInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > 2_147_483_647) {
+  throw new Error("STUDY_TIMEOUT_MS must be a positive 32-bit integer");
+}
 execFileSync("xcrun", ["simctl", "install", device, app], { stdio: "inherit" });
 const startedAt = new Date().toISOString();
 let timeout;
@@ -66,8 +73,8 @@ try {
   });
   const { port } = server.address();
   timeout = setTimeout(
-    () => fail(new Error("No app report within five minutes")),
-    300_000,
+    () => fail(new Error(`No app report within ${timeoutMs} ms`)),
+    timeoutMs,
   );
   execFileSync(
     "xcrun",
@@ -88,6 +95,7 @@ try {
     scope:
       "iOS Simulator functional integration; not physical-device performance",
     device,
+    timeout_ms: timeoutMs,
     bundle_id: bundleID,
     model: { file: path.basename(model), sha256: hash(model) },
     sources: Object.fromEntries(
@@ -99,18 +107,23 @@ try {
         "native-run.mjs",
         "package-lock.json",
         "ios/Podfile.lock",
+        "../../cpp/thistle/ThistleEngine.cpp",
+        "../../ios/Thistle.swift",
+        "../../src/index.tsx",
+        "../../src/Thistle.nitro.ts",
+        "../../Thistle.podspec",
       ].map((file) => [file, hash(path.join(root, file))]),
     ),
     ...report,
   };
   writeFileSync(
-    path.join(root, `native-results-${provider}.json`),
+    resultFile,
     JSON.stringify(evidence, null, 2) + "\n",
   );
   console.log(JSON.stringify(evidence, null, 2));
   if (report.results.some((item) => item.error)) {
     throw new Error(
-      `Native integration failure; see native-results-${provider}.json`,
+      `Native integration failure; see ${resultFile}`,
     );
   }
 } finally {

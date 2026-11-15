@@ -34,7 +34,8 @@ export class ProtocolFailure extends Error {
 
 export async function exercise(
   createSession: (path: string) => Promise<Session>,
-  path: string
+  path: string,
+  onDelta?: (text: string) => void
 ) {
   const session = await createSession(path);
   const observations: Observations = { messages: [], chunks: [] };
@@ -60,9 +61,18 @@ export async function exercise(
     );
     const chunks: string[] = [];
     observations.chunks = chunks;
-    const second = await session.complete(messages, (text) =>
-      chunks.push(text)
-    );
+    const startedAtMs = Date.now();
+    let firstChunkAtMs: number | undefined;
+    let callbacksBeforeResolution = 0;
+    let resolved = false;
+    const second = await session.complete(messages, (text) => {
+      firstChunkAtMs ??= Date.now();
+      if (!resolved) callbacksBeforeResolution++;
+      chunks.push(text);
+      onDelta?.(text);
+    });
+    resolved = true;
+    const resolvedAtMs = Date.now();
     observations.second = second;
     if (!second.text.trim()) throw new Error('Empty streaming completion');
     if (chunks.length === 0) throw new Error('No streaming callbacks');
@@ -76,6 +86,12 @@ export async function exercise(
       first,
       second,
       chunks,
+      streaming: {
+        startedAtMs,
+        firstChunkAtMs,
+        resolvedAtMs,
+        callbacksBeforeResolution,
+      },
       checks: {
         nonemptyChat: true,
         nonemptyStream: true,

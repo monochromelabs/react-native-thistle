@@ -107,8 +107,17 @@ for (const provider of ["thistle", "llama"]) {
 
   test(`${provider}: preserves transcript and reconstructs deltas`, async () => {
     const f = fixture();
-    const result = await f.exercise(f.createSession, "/model.gguf");
+    const observed = [];
+    const result = await f.exercise(f.createSession, "/model.gguf", (text) =>
+      observed.push(text),
+    );
     assert.equal(result.chunks.join(""), result.second.text);
+    assert.equal(observed.join(""), result.second.text);
+    assert.equal(result.streaming.callbacksBeforeResolution, 2);
+    assert.ok(
+      result.streaming.startedAtMs <= result.streaming.firstChunkAtMs &&
+      result.streaming.firstChunkAtMs <= result.streaming.resolvedAtMs,
+    );
     const followup = f.calls[2].messages;
     assert.equal(followup.length, 4);
     assert.equal(followup[2].role, "assistant");

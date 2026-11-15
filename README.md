@@ -59,10 +59,13 @@ npm install react-native-thistle
 npx react-native-thistle setup
 ```
 
-Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge and declares `react-native-nitro-modules` as a peer dependency. The package is intended to make local inference practical to adopt: install it, connect the model assets you want, and let the native build package them for the app. Modern npm versions automatically install a compatible peer dependency when possible, so installing `react-native-thistle` is usually sufficient. To declare Nitro explicitly in the app, or when using a package manager that does not automatically install peers, run:
+Thistle uses [Nitro Modules](https://nitro.margelo.com/) for its native bridge. Setup checks that `react-native-nitro-modules` is declared in the app and installed. If not, it runs `npm install react-native-nitro-modules@^0.36.5` (or `yarn add` / `pnpm add` for apps using those package managers) before configuring model assets. It uses Thistle's supported peer version rather than installing an incompatible latest release. Installation errors stop setup.
+
+Modern npm can automatically install Nitro as Thistle's peer dependency without adding it to the app's `package.json`. React Native autolinking discovers dependencies declared by the app, so having Nitro in `node_modules` alone is not sufficient. To install both packages in a single pass and avoid a second install during setup, use:
 
 ```sh
-npm install react-native-thistle react-native-nitro-modules
+npm install react-native-thistle 'react-native-nitro-modules@^0.36.5'
+npx react-native-thistle setup
 ```
 
 The setup command creates the app-level `assets/` directory, lists the `.gguf` files currently in it, and lets you select one or more models to connect to the native app. The selection is saved in `.thistle/models.json`, so selected models are already checked the next time setup runs. Android and iOS are both configured from that same selection. It is safe to run again after native project changes.
@@ -92,6 +95,35 @@ THISTLE_SKIP_ASSETS=1 npm install react-native-thistle
 ```
 
 Creating the folder is only a convenience. You still need to add a model file yourself.
+
+### Expo Development Builds
+
+Thistle is expected to work with [Expo development builds](https://docs.expo.dev/develop/development-builds/introduction/), which can include custom native modules. **Expo Go is not supported** because it does not include Thistle or Nitro's native code. Expo compatibility has not yet been verified end-to-end.
+
+For a local iOS development build, install the dependencies and generate the native projects first:
+
+```sh
+npx expo install expo-dev-client
+npm install react-native-thistle 'react-native-nitro-modules@^0.36.5'
+npx expo prebuild
+```
+
+Add your GGUF model to the app-level `assets/` directory, then select it with setup and build the app:
+
+```sh
+npx react-native-thistle setup
+npx expo run:ios --device
+```
+
+Thistle currently configures model assets by modifying the generated native projects directly; it does not provide an Expo config plugin. Run setup **after** prebuild, and rerun it after `npx expo prebuild --clean`, which removes those native modifications. Rebuild the development client after native dependency or model-selection changes; reloading JavaScript is not sufficient.
+
+For EAS builds that generate native projects in the cloud, the setup command alone does not automatically reproduce the model-asset wiring. Preserve the configured native projects in the build inputs, or provide an appropriate config plugin or build hook that reapplies the wiring after prebuild. Fully automatic Expo/EAS setup is not currently provided.
+
+### iOS Simulator
+
+Thistle uses CPU-only inference in iOS Simulator builds, including warmup, prompts, and streaming. Metal offloading and Flash Attention are disabled there to avoid the simulator's Metal/mixed-backend path. Physical iOS devices retain automatic Metal acceleration.
+
+Simulator inference can be substantially slower and is not a substitute for on-device validation. This is a backend-isolation mitigation, not a guarantee that every model works in the simulator. If a native numerical assertion still occurs, validate the model on a physical device; JavaScript `try`/`catch` cannot recover from a native process abort. Rebuild the native app after updating Thistle to pick up this behavior.
 
 ## Implementing Local AI Requests
 

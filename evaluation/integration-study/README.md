@@ -7,6 +7,10 @@ checks are shared. The two provider adapters are
 [thistle.ts](./src/thistle.ts) and [llama.ts](./src/llama.ts).
 No inference-engine source was modified.
 
+That statement and the recorded comparison below describe the initial study.
+The follow-up verification described below uses the current checkout, including
+the simulator-only CPU backend mitigation.
+
 ## What is compared
 
 The shared [app](./src/App.tsx) supports loading, a message transcript,
@@ -60,7 +64,8 @@ cp ios/Podfile.lock "pod-lock-${STUDY_PROVIDER}.lock"
 xcodebuild -workspace ios/ThistleLite.xcworkspace -scheme ThistleLite \
   -configuration Release -sdk iphonesimulator \
   -destination 'id=SIMULATOR_UUID' -derivedDataPath build/derived \
-  -jobs 2 ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+  -jobs 2 ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO \
+  HERMES_CLI_PATH="$PWD/node_modules/hermes-compiler/hermesc/osx-bin/hermesc"
 node native-run.mjs "$STUDY_PROVIDER" SIMULATOR_UUID /absolute/path/to/SmolVLM2-2.2B-Instruct-Q4_K_M.gguf
 ```
 
@@ -113,6 +118,55 @@ universally reliable or faster.
 The successful native build transcripts are retained as
 `native-build-thistle.log` and `native-build-llama.log`; runtime capture logs
 and provider-specific CocoaPods locks accompany the JSON outcomes.
+
+## Live streaming follow-up verification
+
+The current protocol also records stream start, first callback, promise
+resolution, and the number of JavaScript callbacks before resolution. Its
+scripted UI displays those deltas and requires at least two React layout
+commits with nonempty answer text before the stream promise resolves. A pass
+therefore checks live native-to-JavaScript delivery and incremental React
+rendering, not just a nonempty final answer or mocked callbacks.
+
+After rebuilding with `STUDY_PROVIDER=thistle`, preserve the initial study
+results by supplying a separate output path:
+
+```sh
+export STUDY_TIMEOUT_MS=900000
+node native-run.mjs thistle SIMULATOR_UUID \
+  /absolute/path/to/SmolVLM2-2.2B-Instruct-Q4_K_M.gguf \
+  build/native-results-thistle-followup-smol.json
+node native-run.mjs thistle SIMULATOR_UUID \
+  /absolute/path/to/Qwen3.5-2B-Q4_K_M.gguf \
+  build/native-results-thistle-followup-qwen.json
+```
+
+The first command reruns the original failing model and conversation. The
+second checks the model used in the simulator crash report. The optional fourth
+argument changes only the result destination; without it, the runner retains
+its original `native-results-PROVIDER.json` destination. Neither run certifies
+physical-device delivery, cancellation, all models, or answer quality.
+`STUDY_TIMEOUT_MS` changes the runner's waiting allowance, not the prompts,
+64-token output budget, or assertions. It defaults to five minutes; CPU-only
+simulator runs can need longer.
+
+On November 15, 2026, both follow-up runs passed on the ARM64 iPhone 17 Pro
+simulator (iOS 26.5), using the Release build with React Native 0.85.0 and
+Nitro Modules 0.36.5:
+
+| Model | Callbacks before resolution | Incremental UI commits before resolution | Exact reconstruction |
+|---|---:|---:|---|
+| SmolVLM2-2.2B-Instruct Q4_K_M | 64 | 64 | Passed |
+| Qwen3.5-2B Q4_K_M | 64 | 64 | Passed |
+
+Both non-streaming and streaming answers were nonempty and respected the
+64-token cap. The original empty-stream failure did not reproduce with the
+current simulator CPU policy. No separate streaming bridge fix was made for
+this verification. The first SmolVLM2 follow-up attempt exceeded the original
+five-minute runner timeout while visibly streaming; the complete rerun took
+approximately 365 seconds with a fifteen-minute allowance. Qwen took
+approximately 230 seconds. These are functional observations, not controlled
+performance measurements. The original failing results above remain unchanged.
 
 ## Responsibility comparison
 

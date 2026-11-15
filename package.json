@@ -1,12 +1,10 @@
 {
   "name": "react-native-thistle",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "An intuitive framework for inference at the edge.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
-  "bin": {
-    "react-native-thistle": "./scripts/setup.cjs"
-  },
+  "bin": "./scripts/setup.cjs",
   "exports": {
     ".": {
       "react-native-thistle-source": "./src/index.tsx",
@@ -46,6 +44,7 @@
     "nitrogen": "nitrogen",
     "typecheck": "tsc && tsc --project evaluation/integration-study/tsconfig.json",
     "test": "jest",
+    "test:setup": "node --test scripts/__tests__/setup.test.cjs",
     "release": "release-it --only-version",
     "lint": "eslint \"**/*.{js,ts,tsx}\""
   },

@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -29,6 +35,13 @@ export default function App({
   const [status, setStatus] = useState('Enter a GGUF filesystem path.');
   const [busy, setBusy] = useState(false);
   const started = useRef(false);
+  const answerCommits = useRef<{ atMs: number; length: number }[]>([]);
+
+  useLayoutEffect(() => {
+    if (answer.length > 0) {
+      answerCommits.current.push({ atMs: Date.now(), length: answer.length });
+    }
+  }, [answer]);
 
   const perform = useCallback(async (action: () => Promise<void>) => {
     setBusy(true);
@@ -57,19 +70,46 @@ export default function App({
 
   const runStudy = useCallback(async () => {
     const results: object[] = [];
+    answerCommits.current = [];
+    setAnswer('');
     setStatus(`Running ${provider}`);
     try {
-      const result = await exercise(createSession, path);
-      console.log('INTEGRATION_RESULT ' + JSON.stringify({ provider, result }));
-      results.push({ provider, result });
+      const result = await exercise(createSession, path, (delta) =>
+        setAnswer((text) => text + delta)
+      );
+      const commitsBeforeResolution = answerCommits.current.filter(
+        ({ atMs }) =>
+          atMs >= result.streaming.startedAtMs &&
+          atMs < result.streaming.resolvedAtMs
+      );
+      const verified = { ...result, ui: { commitsBeforeResolution } };
+      if (
+        result.streaming.callbacksBeforeResolution === 0 ||
+        commitsBeforeResolution.length < 2
+      ) {
+        results.push({
+          provider,
+          error: 'No incremental UI streaming',
+          result: verified,
+        });
+        throw new Error(
+          'Expected callbacks and multiple UI commits before resolution'
+        );
+      }
+      console.log(
+        'INTEGRATION_RESULT ' + JSON.stringify({ provider, result: verified })
+      );
+      results.push({ provider, result: verified });
       setStatus(`${provider}: PASS`);
     } catch (error) {
-      results.push({
-        provider,
-        error: String(error),
-        observations:
-          error instanceof ProtocolFailure ? error.observations : undefined,
-      });
+      if (results.length === 0) {
+        results.push({
+          provider,
+          error: String(error),
+          observations:
+            error instanceof ProtocolFailure ? error.observations : undefined,
+        });
+      }
       console.error(
         'INTEGRATION_RESULT ' +
           JSON.stringify({ provider, error: String(error) })

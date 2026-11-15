@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 
 const appRoot = process.env.INIT_CWD || process.cwd();
 const assetsDirectory = path.join(appRoot, 'assets');
@@ -32,6 +33,72 @@ const colors = {
 
 function colorize(color, text) {
   return `${colors[color]}${text}${colors.reset}`;
+}
+
+function ensureNitro() {
+  const packageFile = path.join(appRoot, 'package.json');
+  const appPackage = JSON.parse(fs.readFileSync(packageFile, 'utf8'));
+  const nitro = 'react-native-nitro-modules';
+  const isDeclared =
+    appPackage.dependencies?.[nitro] || appPackage.devDependencies?.[nitro];
+  const isInstalled = () => {
+    try {
+      require.resolve(`${nitro}/package.json`, { paths: [appRoot] });
+      return true;
+    } catch (error) {
+      if (error.code !== 'MODULE_NOT_FOUND') throw error;
+      return false;
+    }
+  };
+  if (isDeclared && isInstalled()) return;
+
+  const version = require('../package.json').peerDependencies[nitro];
+  const spec = `${nitro}@${version}`;
+  const manager = appPackage.packageManager?.split('@')[0];
+  let command;
+  let args;
+  if (
+    manager === 'pnpm' ||
+    (!manager && fs.existsSync(path.join(appRoot, 'pnpm-lock.yaml')))
+  ) {
+    command = 'pnpm';
+    args = ['add', spec];
+  } else if (
+    manager === 'yarn' ||
+    (!manager && fs.existsSync(path.join(appRoot, 'yarn.lock')))
+  ) {
+    command = 'yarn';
+    args = ['add', spec];
+  } else if (
+    process.env.npm_execpath &&
+    path.basename(process.env.npm_execpath) === 'npm-cli.js'
+  ) {
+    command = process.execPath;
+    args = [process.env.npm_execpath, 'install', spec];
+  } else {
+    command = 'npm';
+    args = ['install', spec];
+  }
+  console.log(
+    `Installing ${spec} as an app dependency for native autolinking...`
+  );
+  const result = spawnSync(command, args, {
+    cwd: appRoot,
+    stdio: 'inherit',
+    shell: process.platform === 'win32' && command !== process.execPath,
+  });
+  if (result.error) throw result.error;
+  if (result.status !== 0) {
+    throw new Error(
+      `Nitro installation failed (${result.signal || result.status}). Install ${spec} in the app and rerun setup.`
+    );
+  }
+  const updatedPackage = JSON.parse(fs.readFileSync(packageFile, 'utf8'));
+  if (!updatedPackage.dependencies?.[nitro] || !isInstalled()) {
+    throw new Error(
+      `Nitro is not installed as an app dependency. Install ${spec} in the app and rerun setup.`
+    );
+  }
 }
 
 function getAssetModels() {
@@ -353,6 +420,7 @@ function setupIos(models) {
 }
 
 function main() {
+  ensureNitro();
   fs.mkdirSync(assetsDirectory, { recursive: true });
   const availableModels = getAssetModels();
   const configuredModels = readSelectedModels(availableModels);

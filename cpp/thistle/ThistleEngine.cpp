@@ -27,6 +27,10 @@
 #include <utility>
 #include <vector>
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#endif
+
 namespace {
 
 using json = nlohmann::ordered_json;
@@ -630,6 +634,11 @@ ContextPtr create_context(Model &model, uint32_t n_ctx, uint32_t n_batch) {
   params.n_batch = n_batch;
   params.n_ubatch = n_batch;
   params.flash_attn_type = LLAMA_FLASH_ATTN_TYPE_AUTO;
+#if defined(__APPLE__) && TARGET_OS_SIMULATOR
+  params.flash_attn_type = LLAMA_FLASH_ATTN_TYPE_DISABLED;
+  params.offload_kqv = false;
+  params.op_offload = false;
+#endif
   params.no_perf = true;
   params.abort_callback = abort_when_unloaded;
   params.abort_callback_data = &model;
@@ -786,6 +795,12 @@ uint64_t load_model(const char *path, const char *options_json) {
     LogCapture capture;
     auto params = llama_model_default_params();
     params.n_gpu_layers = -1;
+#if defined(__APPLE__) && TARGET_OS_SIMULATOR
+    // Keep simulator execution off the Metal/mixed-backend path.
+    ggml_backend_dev_t devices[] = {nullptr};
+    params.devices = devices;
+    params.n_gpu_layers = 0;
+#endif
     model->model = llama_model_load_from_file(path, params);
     if (model->model == nullptr) {
       throw ThistleError("model_load_failed",

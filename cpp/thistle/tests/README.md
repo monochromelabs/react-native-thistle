@@ -49,6 +49,31 @@ CPU checks, not on-device performance or answer-quality certification. The
 contract suite also includes answer-content assertions and explicit ChatML
 overrides; failures must be interpreted separately from memory-safety failures.
 
+## iOS Simulator regression
+
+The engine disables GPU offloading and Flash Attention on iOS Simulator, even
+when Metal is compiled in. Keep assertions enabled when checking numerical
+failures. For an Apple Silicon Mac with a booted simulator:
+
+```sh
+cmake -S cpp/thistle/tests -B build/simulator-engine \
+  -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator \
+  -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=15.1 \
+  -DCMAKE_BUILD_TYPE=Debug \
+  '-DCMAKE_C_FLAGS_DEBUG=-g -O2' '-DCMAKE_CXX_FLAGS_DEBUG=-g -O2' \
+  -DTHISTLE_TEST_ASAN=OFF -DTHISTLE_TEST_METAL=ON \
+  -DGGML_METAL_EMBED_LIBRARY=ON -DGGML_NATIVE=OFF \
+  -DGGML_OPENMP=OFF -DGGML_ACCELERATE=OFF -DGGML_BLAS=OFF
+cmake --build build/simulator-engine --target engine_bench -j 2
+xcrun simctl spawn booted \
+  "$PWD/build/simulator-engine/engine_bench.app/engine_bench" \
+  "$PWD/example/assets/Qwen3.5-2B-Q4_K_M.gguf" 1
+```
+
+This checks model loading, one-token warmup, streaming generation, and unload.
+It does not exercise React Native or asset packaging. Physical-device builds
+retain their normal Metal behavior.
+
 ## Reproducible multi-model evaluation
 
 Build correctness checks with AddressSanitizer and the timing harness without
